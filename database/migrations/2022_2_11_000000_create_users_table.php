@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration {
 			$table->string('name',100);
 			$table->string('email',100)->unique();
 			$table->string('password', 200);
-			$table->integer('loainguoidung_id')->unsigned();
-            $table->foreign('loainguoidung_id')->references('id')->on('loainguoidung')->onUpdate('cascade');
+			$table->integer('ProductType_id')->unsigned();
+            $table->foreign('ProductType_id')->references('id')->on('ProductTypes')->onUpdate('cascade');
 			$table->rememberToken();
 			$table->timestamps();
 		});

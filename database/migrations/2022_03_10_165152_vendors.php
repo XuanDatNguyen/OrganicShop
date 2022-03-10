@@ -17,7 +17,6 @@ class Vendors extends Migration
             $table->string('name', 200);
             $table->string('address', 200);
             $table->string('phone', 12);
-            $table->integer('is_deleted');
             $table->timestamps();
         });
     }
