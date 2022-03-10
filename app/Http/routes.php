@@ -232,4 +232,3 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
 Route::get('admin/login',['as'=>'admin.login.getLogin','uses'=>'Auth\AuthController@getLogin']);
 Route::post('admin/login',['as'=>'admin.login.postLogin','uses'=>'Auth\AuthController@postLogin']);
 Route::get('admin/logout',['as'=>'admin.login.getLogout','uses'=>'Auth\AuthController@logout']);
-
