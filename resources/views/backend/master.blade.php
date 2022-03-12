@@ -75,7 +75,7 @@
                                     <a href="{!! URL::route('admin.loaisanpham.list') !!}"> Loại sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.nhom.list') !!}"> Nhóm thực phẩm</a>
+                                    <a href="{!! URL::route('admin.group.index') !!}"> Nhóm thực phẩm</a>
                                 </li>
                                 <li>
                                     <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị tính</a>

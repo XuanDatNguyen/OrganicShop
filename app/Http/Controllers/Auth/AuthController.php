@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Customer;
 use App\User;
-use App\Khachhang;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -82,19 +82,13 @@ class AuthController extends Controller
             'email' => $data['email'],
             'name' => $data['txtname'],
             'password' => bcrypt($data['password']),
-            'loainguoidung_id' => 2,
+            'role_id' => 2,
         ]);
-        // $id = DB::table('users')->select('id')->where('email',$data['email'])->first();
-        // print_r($id);
-        // $filename=$data->file('fImage')->getClientOriginalName();
-        // $data->file('fImage')->move(
-        //     'images/avatar', $filename
-        // );
-        Khachhang::create([
-            'khachhang_ten' => $data['txtname'],
-            'khachhang_email' => $data['email'],
-            'khachhang_sdt' => $data['txtphone'],
-            // 'khachhang_anh' => $data['txtadr'],
+       
+        Customer::create([
+            'name' => $data['txtname'],
+            'email' => $data['email'],
+            'phone' => $data['txtphone'],
             'user_id' => $user->id,
         ]);
         return $user;
@@ -108,7 +102,7 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'loainguoidung_id'=>1])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id'=>1])) {
             // Authentication passed...
             return redirect()->route('admin.index');
         }

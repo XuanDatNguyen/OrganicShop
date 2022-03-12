@@ -12,47 +12,50 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	$donhang = DB::table('donhang')->where('tinhtranghd_id',1)->count();
-    	$luotbinhluan = DB::table('binhluan')->where('binhluan_trang_thai',0)->count();
-    	$khachhang = DB::table('khachhang')->count();
-    	$sanpham = DB::table('sanpham')->count();
-    	$binhluan = DB::table('binhluan')->where('binhluan_trang_thai',0)->get();
-    	$bannhieu = DB::table('chitietdonhang')
-                ->where('donhang.tinhtranghd_id',4)
-                ->join('donhang','donhang.id','=','chitietdonhang.donhang_id')
+    	$newOrders = DB::table('orders')->where('order_status_id',1)->count();
+    	$newComments = DB::table('comments')->where('status',0)->count();
+    	$customers = DB::table('customers')->count();
+    	$products = DB::table('products')->count();
+    	$comments = DB::table('comments')->where('status',0)->get();
+    	$sell_a_lots = DB::table('order_details')
+        //banhnhieu
+                ->where('orders.order_status_id',4)
+                ->join('orders','orders.id','=','order_details.order_id')
                 ->select(
-                    'sanpham_id',
-                    DB::raw('SUM(chitietdonhang_so_luong) as ban'),
-                    DB::raw('SUM(chitietdonhang_thanh_tien) as tien')
+                    'order_id',
+                    DB::raw('SUM(qty) as sell'),
+                    DB::raw('SUM(total_amount) as total_money')
                     )
-                ->groupBy('sanpham_id')
-                ->orderBy('tien', 'desc')
+                ->groupBy('product_id')
+                ->orderBy('total_money', 'DESC')
                 ->take(10)
                 ->get();
                 // print_r($bannhieu);
-        $nhapnhieu = DB::table('lohang')
-
+        $purchase_a_lots = DB::table('consignments')
+        //nhapnhieu
                 ->select(
-                    'sanpham_id',
-                    DB::raw('SUM(lohang_so_luong_nhap) as nhap'),
-                    DB::raw('SUM(lohang_gia_mua_vao*lohang_so_luong_nhap) as tien')
+                    'product_id',
+                    DB::raw('SUM(qty) as qty'),
+                    DB::raw('SUM(purchase_price*qty) as money')
                     )
-                ->groupBy('sanpham_id')
-                ->orderBy('tien', 'desc')
+                ->groupBy('product_id')
+                ->orderBy('money', 'desc')
                 ->take(10)
                 ->get();
-        $muanhieu = DB::table('donhang')
-                ->where('donhang.tinhtranghd_id',4)
+        //muanhieu
+        $buy_a_lots = DB::table('orders')
+                ->where('orders.order_status_id',4)
                 ->select(
-                    'khachhang_id',
-                    DB::raw('COUNT(khachhang_id) as donhang'),
-                    DB::raw('SUM(donhang_tong_tien) as tien')
+                    'customer_id',
+                    DB::raw('COUNT(customer_id) as order'),
+                    DB::raw('SUM(order_total) as money')
                     )
-                ->groupBy('khachhang_id')
-                ->orderBy('tien', 'desc')
+                ->groupBy('customer_id')
+                ->orderBy('money', 'desc')
                 ->take(10)
                 ->get(); 
         // print_r($nhapnhieu);
-    	return view('backend.dashboard',compact('donhang','binhluan','khachhang','sanpham','luotbinhluan','bannhieu','nhapnhieu','muanhieu'));
+    	// return view('backend.dashboard',compact('donhang','binhluan','khachhang','sanpham','luotbinhluan','bannhieu','nhapnhieu','muanhieu'));
+    	return view('backend.dashboard',compact('newOrders','binhluan','khachhang','sanpham','luotbinhluan','bannhieu','nhapnhieu','muanhieu'));
     }
 }

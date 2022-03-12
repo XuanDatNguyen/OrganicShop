@@ -26,7 +26,7 @@ $this->post('password/reset', 'Auth\PasswordController@reset');
 
 
 
-Route::get('/demo', 'HomeController@demo');
+// Route::get('/demo', 'HomeController@demo');
 
 Route::get('hien-san-pham/{id}','HomeController@hiensanpham');
 
@@ -72,7 +72,7 @@ Route::post('ket-qua-tim-kiem',['as'=>'postTimkiem','uses'=>'HomeController@post
 // Route::post('khach-hang',['as'=>'postKhachhang','uses'=>'AuthController@postCustomer']);
 
 // Route Backend
-Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin'], function() {
     Route::get('tong-quan', ['as'=>'admin.index','uses'=>'AdminController@index']);
     Route::group(['prefix' => 'loaisanpham'], function() {
     	Route::get('danhsach',['as'=>'admin.loaisanpham.list','uses'=>'LoaisanphamController@getList']);
@@ -84,12 +84,12 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'nhom'], function() {
-        Route::get('danhsach',['as'=>'admin.nhom.list','uses'=>'NhomController@getList']);
-        Route::get('them',['as'=>'admin.nhom.getAdd','uses'=>'NhomController@getAdd']);
-        Route::post('them',['as'=>'admin.nhom.postAdd','uses'=>'NhomController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.nhom.getDelete','uses'=>'NhomController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.nhom.getEdit','uses'=>'NhomController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.nhom.postEdit','uses'=>'NhomController@postEdit']);
+        Route::get('danhsach',['as'=>'admin.group.index','uses'=>'GroupController@getList']);
+        Route::get('them',['as'=>'admin.nhom.getAdd','uses'=>'GroupController@getAdd']);
+        Route::post('them',['as'=>'admin.nhom.postAdd','uses'=>'GroupController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.nhom.getDelete','uses'=>'GroupController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.nhom.getEdit','uses'=>'GroupController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.nhom.postEdit','uses'=>'GroupController@postEdit']);
     });
 
     Route::group(['prefix' => 'donvitinh'], function() {
