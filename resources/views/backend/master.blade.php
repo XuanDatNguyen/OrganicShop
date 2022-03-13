@@ -72,17 +72,17 @@
                                     <a href="{!! URL::route('admin.sanpham.list') !!}"> Sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.loaisanpham.list') !!}"> Loại sản phẩm</a>
+                                    <a href="{!! URL::route('admin.category.index') !!}"> Loại sản phẩm</a>
                                 </li>
                                 <li>
                                     <a href="{!! URL::route('admin.group.index') !!}"> Nhóm thực phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.unit.index') !!}">Đơn vị tính</a>
+                                    <a href="{!! URL::route('admin.unit.index') !!}">Đơn vị</a>
                                 </li>
                                 
                                 <li>
-                                    <a href="{!! URL::route('admin.nhacungcap.list') !!}">Nhà cung cấp</a>
+                                    <a href="{!! URL::route('admin.vendor.index') !!}">Nhà cung cấp</a>
                                 </li>
                                 <li>
                                     <a href="{!! URL::route('admin.lohang.list') !!}">Lô hàng</a>

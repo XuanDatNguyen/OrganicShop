@@ -2,7 +2,7 @@
 @section('title')
     <h3 class="page-header ">
         Loại sản phẩm /
-        <a href="{!! URL::route('admin.loaisanpham.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
+        <a href="{!! URL::route('admin.category.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
@@ -27,18 +27,18 @@
              @foreach ($data as $item)
             <tr class="odd gradeX">
                 <td>{!! $item->id !!}</td>
-                <td>{!! $item->loaisanpham_ten !!}</td>
+                <td>{!! $item->name !!}</td>
                 <td>
-                    <?php $nhom = DB::table('nhom')->where('id',$item->nhom_id)->first(); ?>
-                    @if (!empty($nhom->nhom_ten))
-                        {!! $nhom->nhom_ten !!}
+                    <?php $group = DB::table('groups')->where('id',$item->group_id)->first(); ?>
+                    @if (!empty($group->name))
+                        {!! $group->name !!}
                     @else
                         {!! NULL !!}
                     @endif
                 </td>
                 <td class="center">
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.loaisanpham.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
-                    <a href="{!! URL::route('admin.loaisanpham.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.category.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.category.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>
             @endforeach

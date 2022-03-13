@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-    <form action="{!! route('admin.loaisanpham.getAdd') !!}" method="POST" enctype="multipart/form-data">
+    <form action="{!! route('admin.category.getAdd') !!}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         <div class="row">
         <div class="col-lg-12 ">
@@ -12,7 +12,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.loaisanpham.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.category.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">
@@ -33,7 +33,7 @@
                 <div>
                     <select id="input" name="txtLSPParent"  class="form-control">
                             <option value="">--Chọn nhóm thực phẩm--</option>
-                            <?php Select_Function($nhom); ?>
+                            <?php Select_Function($group); ?>
                     </select>
                 </div>
                 <div>

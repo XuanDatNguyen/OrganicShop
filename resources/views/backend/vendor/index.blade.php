@@ -2,7 +2,7 @@
 @section('title')
     <h3 class="page-header">
         Nhà cung cấp / 
-        <a href="{!! URL::route('admin.nhacungcap.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
+        <a href="{!! URL::route('admin.vendor.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
@@ -28,12 +28,12 @@
            @foreach ($data as $item)
            <tr class="odd gradeX">
                 <td>{!! $item->id !!}</td>
-                <td>{!! $item->nhacungcap_ten !!}</td>
-                <td>{!! $item->nhacungcap_dia_chi !!}</td>
-                <td>{!! $item->nhacungcap_sdt !!}</td>
+                <td>{!! $item->name !!}</td>
+                <td>{!! $item->address !!}</td>
+                <td>{!! $item->phone !!}</td>
                 <td class="center">
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.nhacungcap.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
-                    <a href="{!! URL::route('admin.nhacungcap.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.vendor.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.vendor.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>
             @endforeach

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class LoaisanphamAddRequest extends Request
+class CategoryAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class LoaisanphamAddRequest extends Request
     public function rules()
     {
         return [
-            'txtLSPName'    => 'required|unique:loaisanpham,loaisanpham_ten',
+            'txtLSPName'    => 'required|unique:categories,name',
             'txtLSPParent'  => 'required',
         ];
     }

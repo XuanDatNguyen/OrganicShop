@@ -13,7 +13,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.loaisanpham.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.category.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label>Tên</label>
-                <input class="form-control" name="txtLSPName" placeholder="Tên loại sản phẩm..." value="{!! $loaisp->loaisanpham_ten !!}" />
+                <input class="form-control" name="txtLSPName" placeholder="Tên loại sản phẩm..." value="{!! $category->name !!}" />
                 <div>
                     {!! $errors->first('txtLSPName') !!}
                 </div>
@@ -33,8 +33,8 @@
                 <label for="input" >Nhóm</label>
                 <div>
                     <select id="input" name="txtLSPParent"  class="form-control">
-                            <option value=""> Select Cate</option>
-                            <?php Select_Function($nhom,$loaisp->nhom_id); ?>
+                            <option value=""> </option>
+                            <?php Select_Function($group,$category->group_id); ?>
                     </select>
                 </div>
                 <div>
@@ -45,7 +45,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label>Mô tả</label>
-                <textarea class="form-control" rows="3" name="txtLSPIntro" placeholder="Mô tả...">{!! $loaisp->loaisanpham_mo_ta !!}</textarea>
+                <textarea class="form-control" rows="3" name="txtLSPIntro" placeholder="Mô tả...">{!! $category->description !!}</textarea>
                 <script type="text/javascript">CKEDITOR.replace('txtLSPIntro'); </script>
             </div>
         </div>

@@ -75,12 +75,12 @@ Route::post('ket-qua-tim-kiem',['as'=>'postTimkiem','uses'=>'HomeController@post
 Route::group(['prefix' => 'admin'], function() {
     Route::get('tong-quan', ['as'=>'admin.index','uses'=>'AdminController@index']);
     Route::group(['prefix' => 'loaisanpham'], function() {
-    	Route::get('danhsach',['as'=>'admin.loaisanpham.list','uses'=>'LoaisanphamController@getList']);
-        Route::get('them',['as'=>'admin.loaisanpham.getAdd','uses'=>'LoaisanphamController@getAdd']);
-        Route::post('them',['as'=>'admin.loaisanpham.postAdd','uses'=>'LoaisanphamController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.loaisanpham.getDelete','uses'=>'LoaisanphamController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.loaisanpham.getEdit','uses'=>'LoaisanphamController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.loaisanpham.postEdit','uses'=>'LoaisanphamController@postEdit']);
+    	Route::get('danhsach',['as'=>'admin.category.index','uses'=>'CategoryController@getList']);
+        Route::get('them',['as'=>'admin.category.getAdd','uses'=>'CategoryController@getAdd']);
+        Route::post('them',['as'=>'admin.category.postAdd','uses'=>'CategoryController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.category.getDelete','uses'=>'CategoryController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.category.getEdit','uses'=>'CategoryController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.category.postEdit','uses'=>'CategoryController@postEdit']);
     });
 
     Route::group(['prefix' => 'nhom'], function() {
@@ -113,23 +113,15 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'nhacungcap'], function() {
-    	Route::get('danhsach',['as'=>'admin.nhacungcap.list','uses'=>'NhacungcapController@getList']);
-        Route::get('them',['as'=>'admin.nhacungcap.getAdd','uses'=>'NhacungcapController@getAdd']);
-        Route::post('them',['as'=>'admin.nhacungcap.postAdd','uses'=>'NhacungcapController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.nhacungcap.getDelete','uses'=>'NhacungcapController@getDelete']);
-        Route::post('xoa/{id}',['as'=>'admin.nhacungcap.postDelete','uses'=>'NhacungcapController@postDelete']);
-        Route::get('sua/{id}',['as'=>'admin.nhacungcap.getEdit','uses'=>'NhacungcapController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.nhacungcap.postEdit','uses'=>'NhacungcapController@postEdit']);
+    	Route::get('danhsach',['as'=>'admin.vendor.index','uses'=>'VendorController@getList']);
+        Route::get('them',['as'=>'admin.vendor.getAdd','uses'=>'VendorController@getAdd']);
+        Route::post('them',['as'=>'admin.vendor.postAdd','uses'=>'VendorController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.vendor.getDelete','uses'=>'VendorController@getDelete']);
+        Route::post('xoa/{id}',['as'=>'admin.vendor.postDelete','uses'=>'VendorController@postDelete']);
+        Route::get('sua/{id}',['as'=>'admin.vendor.getEdit','uses'=>'VendorController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.vendor.postEdit','uses'=>'VendorController@postEdit']);
     });
 
-    Route::group(['prefix' => 'tuyendung'], function() {
-        Route::get('danhsach',['as'=>'admin.tuyendung.list','uses'=>'TuyendungController@getList']);
-        Route::get('them',['as'=>'admin.tuyendung.getAdd','uses'=>'TuyendungController@getAdd']);
-        Route::post('them',['as'=>'admin.tuyendung.postAdd','uses'=>'TuyendungController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.tuyendung.getDelete','uses'=>'TuyendungController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.tuyendung.getEdit','uses'=>'TuyendungController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.tuyendung.postEdit','uses'=>'TuyendungController@postEdit']);
-    });
 
     Route::group(['prefix' => 'khachhang'], function() {
         Route::get('danhsach',['as'=>'admin.khachhang.list','uses'=>'KhachhangController@getList']);

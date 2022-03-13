@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class NhacungcapAddRequest extends Request
+class VendorAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class NhacungcapAddRequest extends Request
     public function rules()
     {
         return [
-            'txtNCCName'     => 'required|unique:nhacungcap,nhacungcap_ten',
+            'txtNCCName'     => 'required|unique:vendors,name',
             'txtNCCPhone'    => 'required|max:12|min:10',
             'txtNCCAdress'   => 'required'
         ];
