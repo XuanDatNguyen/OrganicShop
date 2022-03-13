@@ -32,7 +32,7 @@
                 <label for="input" >Nhóm</label>
                 <div>
                     <select id="input" name="txtLSPParent"  class="form-control">
-                            <option value="">--Chọn nhóm thực phẩm--</option>
+                            <optinon value="">--Chọn nhóm thực phẩm--</optinon>
                             <?php Select_Function($group); ?>
                     </select>
                 </div>

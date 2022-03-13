@@ -69,7 +69,7 @@
                             <a href="#"><i class="glyphicon glyphicon-tasks"></i> Quản lý Sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{!! URL::route('admin.sanpham.list') !!}"> Sản phẩm</a>
+                                    <a href="{!! URL::route('admin.product.index') !!}"> Sản phẩm</a>
                                 </li>
                                 <li>
                                     <a href="{!! URL::route('admin.category.index') !!}"> Loại sản phẩm</a>
@@ -85,7 +85,7 @@
                                     <a href="{!! URL::route('admin.vendor.index') !!}">Nhà cung cấp</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.lohang.list') !!}">Lô hàng</a>
+                                    <a href="{!! URL::route('admin.consignment.index') !!}">Lô hàng</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

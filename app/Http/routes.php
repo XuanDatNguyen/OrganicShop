@@ -102,14 +102,14 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'lohang'], function() {
-        Route::get('danhsach',['as'=>'admin.lohang.list','uses'=>'LohangController@getList']);
-        Route::get('them',['as'=>'admin.lohang.getAdd','uses'=>'LohangController@getAdd']);
-        Route::post('them',['as'=>'admin.lohang.postAdd','uses'=>'LohangController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.lohang.getDelete','uses'=>'LohangController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.lohang.getEdit','uses'=>'LohangController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.lohang.postEdit','uses'=>'LohangController@postEdit']);
-        Route::get('nhap-hang/{id}',['as'=>'admin.lohang.getNhaphang','uses'=>'LohangController@getNhaphang']);
-        Route::post('nhap-hang/{id}',['as'=>'admin.lohang.postNhaphang','uses'=>'LohangController@postNhaphang']);
+        Route::get('danhsach',['as'=>'admin.consignment.index','uses'=>'ConsignmentController@getList']);
+        Route::get('them',['as'=>'admin.consignment.getAdd','uses'=>'ConsignmentController@getAdd']);
+        Route::post('them',['as'=>'admin.consignment.postAdd','uses'=>'ConsignmentController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.consignment.getDelete','uses'=>'ConsignmentController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.consignment.getEdit','uses'=>'ConsignmentController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.consignment.postEdit','uses'=>'ConsignmentController@postEdit']);
+        Route::get('nhap-hang/{id}',['as'=>'admin.consignment.getNhaphang','uses'=>'ConsignmentController@getNhaphang']);
+        Route::post('nhap-hang/{id}',['as'=>'admin.consignment.postNhaphang','uses'=>'ConsignmentController@postNhaphang']);
     });
 
     Route::group(['prefix' => 'nhacungcap'], function() {
@@ -157,13 +157,13 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'sanpham'], function() {
-        Route::get('danhsach',['as'=>'admin.sanpham.list','uses'=>'SanphamController@getList']);
-        Route::get('them',['as'=>'admin.sanpham.getAdd','uses'=>'SanphamController@getAdd']);
-        Route::post('them',['as'=>'admin.sanpham.postAdd','uses'=>'SanphamController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.sanpham.getDelete','uses'=>'SanphamController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.sanpham.getEdit','uses'=>'SanphamController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.sanpham.postEdit','uses'=>'SanphamController@postEdit']);
-        Route::get('xoahinh/{id}',['as'=>'admin.sanpham.delImage','uses'=>'SanphamController@delImage']);
+        Route::get('danhsach',['as'=>'admin.product.index','uses'=>'ProductController@getList']);
+        Route::get('them',['as'=>'admin.product.getAdd','uses'=>'ProductController@getAdd']);
+        Route::post('them',['as'=>'admin.product.postAdd','uses'=>'ProductController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.product.getDelete','uses'=>'ProductController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.product.getEdit','uses'=>'ProductController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.product.postEdit','uses'=>'ProductController@postEdit']);
+        Route::get('xoahinh/{id}',['as'=>'admin.product.delImage','uses'=>'ProductController@delImage']);
     });
 
     Route::group(['prefix' => 'khuyenmai'], function() {
