@@ -92,13 +92,13 @@ Route::group(['prefix' => 'admin'], function() {
         Route::post('sua/{id}',['as'=>'admin.nhom.postEdit','uses'=>'GroupController@postEdit']);
     });
 
-    Route::group(['prefix' => 'donvitinh'], function() {
-        Route::get('danhsach',['as'=>'admin.donvitinh.list','uses'=>'DonvitinhController@getList']);
-        Route::get('them',['as'=>'admin.donvitinh.getAdd','uses'=>'DonvitinhController@getAdd']);
-        Route::post('them',['as'=>'admin.donvitinh.postAdd','uses'=>'DonvitinhController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.donvitinh.getDelete','uses'=>'DonvitinhController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.donvitinh.getEdit','uses'=>'DonvitinhController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.donvitinh.postEdit','uses'=>'DonvitinhController@postEdit']);
+    Route::group(['prefix' => 'donvi'], function() {
+        Route::get('danhsach',['as'=>'admin.unit.index','uses'=>'UnitController@getList']);
+        Route::get('them',['as'=>'admin.unit.getAdd','uses'=>'UnitController@getAdd']);
+        Route::post('them',['as'=>'admin.unit.postAdd','uses'=>'UnitController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.unit.getDelete','uses'=>'UnitController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.unit.getEdit','uses'=>'UnitController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.unit.postEdit','uses'=>'UnitController@postEdit']);
     });
 
     Route::group(['prefix' => 'lohang'], function() {

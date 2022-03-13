@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class DonvitinhAddRequest extends Request
+class UnitEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,13 @@ class DonvitinhAddRequest extends Request
     public function rules()
     {
         return [
-            'txtDVTName'    => 'required|unique:donvitinh,donvitinh_ten'
+            'txtDVTName'    => 'required'
         ];
     }
 
     public function messages() {
         return [
-            'txtDVTName.required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
-            'txtDVTName.unique'     => '<div><strong  style="color: red;">Dữ liệu này đã tồn tại!</strong></div>'
+            'txtDVTName.required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>'
         ];
     }
 }

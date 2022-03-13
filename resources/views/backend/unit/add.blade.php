@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-<form action="{!! route('admin.donvitinh.getAdd') !!}" method="POST">
+<form action="{!! route('admin.unit.getAdd') !!}" method="POST">
     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
     <div class="row">
         <div class="col-lg-12 ">
@@ -12,7 +12,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.donvitinh.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.unit.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">

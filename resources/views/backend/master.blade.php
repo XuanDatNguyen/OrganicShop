@@ -25,8 +25,8 @@
     <link href="/backend/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <script src="/backend/js/ckeditor/ckeditor.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.c
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+   
 </head>
 
 <body>
@@ -78,7 +78,7 @@
                                     <a href="{!! URL::route('admin.group.index') !!}"> Nhóm thực phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị tính</a>
+                                    <a href="{!! URL::route('admin.unit.index') !!}">Đơn vị tính</a>
                                 </li>
                                 
                                 <li>
@@ -118,9 +118,8 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
+                
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
 
         <!-- Page Content -->

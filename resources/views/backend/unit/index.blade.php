@@ -2,7 +2,7 @@
 @section('title')
     <h3 class="page-header">
         Đơn vị tính /
-        <a href="{!! URL::route('admin.donvitinh.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;"> Thêm mới</a>
+        <a href="{!! URL::route('admin.unit.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;"> Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
@@ -27,11 +27,11 @@
              @foreach ($data as $item)
             <tr class="odd gradeX">
                 <td class="col-lg-1">{!! $item->id !!}</td>
-                <td class="col-lg-3">{!! $item->donvitinh_ten !!}</td>
-                <td class="col-lg-6">{!! $item->donvitinh_mo_ta !!}</td>
+                <td class="col-lg-3">{!! $item->name !!}</td>
+                <td class="col-lg-6">{!! $item->description !!}</td>
                 <td class="center">
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.donvitinh.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
-                    <a href="{!! URL::route('admin.donvitinh.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.unit.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.unit.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>
             @endforeach
