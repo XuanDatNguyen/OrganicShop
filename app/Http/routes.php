@@ -163,20 +163,19 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('xoa/{id}',['as'=>'admin.product.getDelete','uses'=>'ProductController@getDelete']);
         Route::get('sua/{id}',['as'=>'admin.product.getEdit','uses'=>'ProductController@getEdit']);
         Route::post('sua/{id}',['as'=>'admin.product.postEdit','uses'=>'ProductController@postEdit']);
-        Route::get('xoahinh/{id}',['as'=>'admin.product.delImage','uses'=>'ProductController@delImage']);
     });
 
     Route::group(['prefix' => 'khuyenmai'], function() {
-        Route::get('danhsach',['as'=>'admin.khuyenmai.list','uses'=>'KhuyenmaiController@getList']);
-        Route::get('them',['as'=>'admin.khuyenmai.getAdd','uses'=>'KhuyenmaiController@getAdd']);
-        Route::post('them',['as'=>'admin.khuyenmai.postAdd','uses'=>'KhuyenmaiController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.khuyenmai.getDelete','uses'=>'KhuyenmaiController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.khuyenmai.getEdit','uses'=>'KhuyenmaiController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.khuyenmai.postEdit','uses'=>'KhuyenmaiController@postEdit']);
-        Route::get('them-san-pham-km',['as'=>'admin.khuyenmai.getAddPromotion','uses'=>'KhuyenmaiController@getAddPromotion']);
-        Route::post('them-san-pham-km',['as'=>'admin.khuyenmai.postAddPromotion','uses'=>'KhuyenmaiController@postAddPromotion']);
-        Route::get('sua-san-pham-km/{id}',['as'=>'admin.khuyenmai.getEditPromotion','uses'=>'KhuyenmaiController@getEditPromotion']);
-        Route::post('sua-san-pham-km/{id}',['as'=>'admin.khuyenmai.postEditPromotion','uses'=>'KhuyenmaiController@postEditPromotion']);
+        Route::get('danhsach',['as'=>'admin.promotion.index','uses'=>'PromotionController@getList']);
+        Route::get('them',['as'=>'admin.promotion.getAdd','uses'=>'PromotionController@getAdd']);
+        Route::post('them',['as'=>'admin.promotion.postAdd','uses'=>'PromotionController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.promotion.getDelete','uses'=>'PromotionController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.promotion.getEdit','uses'=>'PromotionController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.promotion.postEdit','uses'=>'PromotionController@postEdit']);
+        Route::get('them-san-pham-km',['as'=>'admin.promotion.getAddPromotion','uses'=>'PromotionController@getAddPromotion']);
+        Route::post('them-san-pham-km',['as'=>'admin.promotion.postAddPromotion','uses'=>'PromotionController@postAddPromotion']);
+        Route::get('sua-san-pham-km/{id}',['as'=>'admin.promotion.getEditPromotion','uses'=>'PromotionController@getEditPromotion']);
+        Route::post('sua-san-pham-km/{id}',['as'=>'admin.promotion.postEditPromotion','uses'=>'PromotionController@postEditPromotion']);
     });
 
     Route::group(['prefix' => 'binhluan'], function() {

@@ -96,23 +96,27 @@
                         <li>
                             <a href="{!! URL::route('admin.customer.index') !!}"><i class="fa fa-users"></i> Khách hàng</a>
                         </li>
+                        
                         <li>
                             <a href="{!! URL::route('admin.donhang.list') !!}"><i class="fa fa-file-text"></i> Đơn hàng</a>
                         </li>
+
                         <li>
                             <a href="{!! URL::route('admin.binhluan.list') !!}"><i class="fa fa-comments-o"></i> Bình luận</a>
                         </li>
+
                         <li>
                             <a href="{!! URL::route('admin.article.index') !!}"><i class="fa fa-list"></i> Bài viết</a>
                         </li>
+
                         <li>
                             <a href="{!! URL::route('admin.banner.index') !!}"><i class="fa-share-alt-square"></i> Quảng cáo</a>
                         </li>
+                       
                         <li>
+                            <a href="{!! URL::route('admin.promotion.index') !!}"><i class="fa fa-bars"></i> Khuyến mãi</a>
                         </li>
-                        <li>
-                            <a href="{!! URL::route('admin.khuyenmai.list') !!}"><i class="fa fa-bars"></i> Khuyến mãi</a>
-                        </li>
+
                         <li>
                             <a href="{!! URL::route('admin.thongke.list') !!}"><i class="fa fa-cubes"></i> Kho hàng</a>
                         </li>
