@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class QuangcaoAddRequest extends Request
+class BannerAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

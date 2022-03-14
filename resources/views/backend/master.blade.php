@@ -94,7 +94,7 @@
                             <a href="{!! URL::route('admin.nhanvien.list') !!}"><i class="fa fa-users"></i>Người dùng</a>
                         </li> -->
                         <li>
-                            <a href="{!! URL::route('admin.khachhang.list') !!}"><i class="fa fa-users"></i> Khách hàng</a>
+                            <a href="{!! URL::route('admin.customer.index') !!}"><i class="fa fa-users"></i> Khách hàng</a>
                         </li>
                         <li>
                             <a href="{!! URL::route('admin.donhang.list') !!}"><i class="fa fa-file-text"></i> Đơn hàng</a>
@@ -103,10 +103,10 @@
                             <a href="{!! URL::route('admin.binhluan.list') !!}"><i class="fa fa-comments-o"></i> Bình luận</a>
                         </li>
                         <li>
-                            <a href="{!! URL::route('admin.baiviet.list') !!}"><i class="fa fa-list"></i> Bài viết</a>
+                            <a href="{!! URL::route('admin.article.index') !!}"><i class="fa fa-list"></i> Bài viết</a>
                         </li>
                         <li>
-                            <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i> Quảng cáo</a>
+                            <a href="{!! URL::route('admin.banner.index') !!}"><i class="fa-share-alt-square"></i> Quảng cáo</a>
                         </li>
                         <li>
                         </li>

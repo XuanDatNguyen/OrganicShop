@@ -1,7 +1,7 @@
 @extends('backend.master')
 @section('title')
     <h3 class="page-header ">
-        Lịch sử mua hàng của khách hàng: <b><i>{{$khachhang->khachhang_ten}}</i></b>
+        Lịch sử mua hàng của khách hàng: <b><i>{{$customer->name}}</i></b>
         
     </h3>
 @stop
@@ -9,12 +9,12 @@
 <div class="panel panel-default">
 <div class="panel-heading">
     <b><i>Danh sách đơn hàng</i></b>
-    <a href="{!! URL::route('admin.khachhang.list') !!}" class="btn btn-default">Quay lại</a>
+    <a href="{!! URL::route('admin.customer.index') !!}" class="btn btn-default">Quay lại</a>
 </div>
 <!-- .panel-heading -->
 <div class="panel-body">
     <div class="panel-group" id="accordion">
-        @foreach ($donhang as $item)
+        @foreach ($order as $item)
         <?php 
              
             switch ($item->tinhtranghd_id) {
@@ -39,7 +39,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <?php
-                    $tt = DB::table('tinhtranghd')->where('id', $item->tinhtranghd_id)->first();  
+                    $tt = DB::table('order_statuses')->where('id', $item->order_status_id)->first();  
                     ?>
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$item->id}}" ><p style="color:white;"><b>Đơn hàng số {{ $item->id }} | <i>Tình trạng:</i> {{$tt->tinhtranghd_ten}}</b></p></a>
 
@@ -59,19 +59,19 @@
                               <tbody>
                                   <tr>
                                       <td><b>Tên khách hàng</b></td>
-                                      <td>{!! $khachhang->khachhang_ten !!}</td>
+                                      <td>{!! $customer->name !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Số điện thoại</b></td>
-                                      <td>{!! $khachhang->khachhang_sdt !!}</td>
+                                      <td>{!! $customer->phone !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Email</b></td>
-                                      <td>{!! $khachhang->khachhang_email !!}</td>
+                                      <td>{!! $customer->email !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Địa chỉ</b></td>
-                                      <td>{!! $khachhang->khachhang_dia_chi !!}</td>
+                                      <td>{!! $customer->address !!}</td>
                                   </tr>
                               </tbody>
                           </table>
@@ -91,25 +91,25 @@
                               <tbody>
                                   <tr>
                                       <td><b>Người nhận hàng</b></td>
-                                      <td>{!! $item->donhang_nguoi_nhan !!}</td>
+                                      <td>{!! $item->recipient !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Số điện thoại</b></td>
-                                      <td>{!! $item->donhang_nguoi_nhan_sdt !!}</td>
+                                      <td>{!! $item->phone !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Email</b></td>
-                                      <td>{!! $item->donhang_nguoi_nhan_email !!}</td>
+                                      <td>{!! $item->recipient_email !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Địa chỉ</b></td>
-                                      <td>{!! $item->donhang_nguoi_nhan_dia_chi !!}</td>
+                                      <td>{!! $item->recipient_address !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Ghi chú</b></td>
                                       <td>
-                                      @if (!asset($item->donhang_ghi_chu))
-                                        {{ $item->donhang_ghi_chu }}
+                                      @if (!asset($item->oder_note))
+                                        {{ $item->oder_note }}
                                       @else
                                         Không có ghi chú
                                       @endif
@@ -124,7 +124,7 @@
                     </div>
                     </div>
                     <?php 
-                        $chitiet = DB::table('chitietdonhang')->where('donhang_id',$item->id)->get();
+                        $order_detail = DB::table('order_details')->where('oder_id',$item->id)->get();
                     ?>
                     <hr>
                     <div class="row">
@@ -148,25 +148,25 @@
                                         </thead>
                                         <tbody>
                                         <?php $count = 0; ?>
-                                            @foreach ($chitiet as $val)
+                                            @foreach ($order_detail as $val)
                                                 <tr>
                                                     <td>{!! $count = $count + 1 !!}</td>
                                                     <td>
                                                         <?php  
-                                                            $sp = DB::table('sanpham')->where('id',$val->sanpham_id)->first();
-                                                            print_r($sp->sanpham_ten);
+                                                            $product = DB::table('products')->where('id',$val->product_id)->first();
+                                                            print_r($product->name);
                                                         ?>
                                                     </td>
                                                     <td>
-                                                    {!! number_format($val->chitietdonhang_thanh_tien/$val->chitietdonhang_so_luong,0,",",".") !!} vnđ 
+                                                    {!! number_format($val->total_amount/$val->qty,0,",",".") !!} vnđ 
                                                     </td>
-                                                    <td>{!! $val->chitietdonhang_so_luong !!}</td>
-                                                    <td>{!! number_format("$val->chitietdonhang_thanh_tien",0,",",".") !!} vnđ </td>
+                                                    <td>{!! $val->qty !!}</td>
+                                                    <td>{!! number_format("$val->total_amount",0,",",".") !!} vnđ </td>
                                                 </tr>
                                             @endforeach
                                             <tr>
                                             <td colspan="5">
-                                            <b>Tổng tiền : {!! number_format("$item->donhang_tong_tien",0,",",".") !!} vnđ </b>
+                                            <b>Tổng tiền : {!! number_format("$item->oder_total",0,",",".") !!} vnđ </b>
                                             </td>
                                             </tr>
                                         </tbody>

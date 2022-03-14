@@ -2,7 +2,7 @@
 @section('title')
     <h3 class="page-header">
         Bài viết /
-        <a href="{!! URL::route('admin.baiviet.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
+        <a href="{!! URL::route('admin.article.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
@@ -27,14 +27,14 @@
             @foreach ($data as $item)
            <tr class="odd gradeX">
                 <td>
-                <img src="{!! asset('images/monngon/'.$item->monngon_anh) !!}" class="img-responsive img-rounded" alt="Image" style="width: 70px; height: 70khupx;">
+                <img src="{!! asset('images/article/'.$item->image) !!}" class="img-responsive img-rounded" alt="Image" style="width: 70px; height: 70khupx;">
                 </td>
                 <td>{!! $item->id !!}</td>
-                <td>{!! $item->monngon_tieu_de !!}</td>
+                <td>{!! $item->title !!}</td>
                 <td>{!! date("d-m-Y",strtotime($item->created_at)) !!}</td>
                 <td class="center">
-                    <a href="{!! URL::route('admin.baiviet.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.baiviet.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.article.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.article.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
                 </td>
             </tr>
             @endforeach

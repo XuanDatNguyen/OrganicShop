@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 
-class KhachhangController extends Controller
+class CustomerController extends Controller
 {
 
     public function getList()
     {
-        $data = DB::table('khachhang')->get();
-    	return view('backend.khachhang.danhsach',compact('data'));
+        $data = DB::table('customers')->get();
+    	return view('backend.customer.index',compact('data'));
     }
 
     public function getAdd()
@@ -28,13 +28,13 @@ class KhachhangController extends Controller
 
     public function getDelete($id)
     {
-    	$id_user = DB::table('khachhang')
+    	$id_user = DB::table('customers')
             ->select('user_id')
             ->where('id',$id)
             ->first();
-        DB::table('khachhang')->where('id',$id)->delete();
+        DB::table('customers')->where('id',$id)->delete();
         DB::table('users')->where('id',$id_user->user_id)->delete();
-        return redirect()->route('admin.khachhang.list')->with(['flash_level'=>'success','flash_message'=>'Xóa khách hàng thành công!!!']);
+        return redirect()->route('admin.customer.index')->with(['flash_level'=>'success','flash_message'=>'Xóa khách hàng thành công!!!']);
     }
 
     public function getEdit()
@@ -49,8 +49,8 @@ class KhachhangController extends Controller
 
     public function getHistory($id)
     {
-        $khachhang = DB::table('khachhang')->where('id',$id)->first();
-        $donhang = DB::table('donhang')->where('khachhang_id',$id)->get();
-        return view('backend.khachhang.lichsu',compact('khachhang','donhang'));
+        $customer = DB::table('customers')->where('id',$id)->first();
+        $order = DB::table('orders')->where('customer_id',$id)->get();
+        return view('backend.customer.history',compact('customer','order'));
     }
 }

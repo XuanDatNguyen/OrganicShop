@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-    <form action="{!! route('admin.baiviet.getAdd') !!}" method="POST"  enctype="multipart/form-data">
+    <form action="{!! route('admin.article.getAdd') !!}" method="POST"  enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         <div class="row">
         <div class="col-lg-12 ">
@@ -12,7 +12,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.baiviet.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.article.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">
@@ -54,7 +54,7 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label>Ảnh đại diện</label>
+                <label>Thêm ảnh</label>
                 <input type="file" name="fImage" value="{!! old('fImage') !!}">
                 <div>
                     {!! $errors->first('fImage') !!}
@@ -67,7 +67,7 @@
         <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Nguyên liệu</h3>
+                    <h3 class="panel-title">Nguyên liệu có sãn tại cửa hàng</h3>
                 </div>
             <div class="panel-body">
             <div class="dataTable_wrapper">
@@ -85,7 +85,7 @@
                             <input type="checkbox" name="products[{!! $item->id !!}]" id="{!! $item->id !!}" value="{!! $item->id !!}">
                         </td>
                         <td>
-                            {!! $item->sanpham_ten !!}
+                            {!! $item->name !!}
                         </td>
                     </tr>
                     @endforeach

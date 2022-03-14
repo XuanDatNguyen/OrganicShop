@@ -2,7 +2,7 @@
 @section('title')
     <h3 class="page-header ">
         Quảng cáo /
-        <a href="{!! URL::route('admin.quangcao.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
+        <a href="{!! URL::route('admin.banner.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;">Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
@@ -31,23 +31,23 @@
                 
                 <td>{!! $item->id !!}</td>
                 <td>
-                <img src="{!! asset('images/slide/' . $item->quangcao_anh) !!}" class="img-responsive img-rounded" alt="Image" style="width: 70px; height: 40px;">
+                <img src="{!! asset('images/banner/' . $item->image) !!}" class="img-responsive img-rounded" alt="Image" style="width: 70px; height: 40px;">
                 </td>
-                <td>{!! $item->quangcao_anh !!}</td>
+                <td>{!! $item->image !!}</td>
                 <td align="center">
                     
-                    @if ($item->quangcao_trang_thai == 1)
-                    <a href="{!! URL::route('admin.quangcao.getChance', [$item->id,0] ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Hiện</a>
+                    @if ($item->status == 1)
+                    <a href="{!! URL::route('admin.banner.getChange', [$item->id,0] ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Hiện</a>
                     <input type="hidden" name="txtChance" value="0" />
                     @else
-                    <a href="{!! URL::route('admin.quangcao.getChance', [$item->id,1] ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Ẩn</a>
+                    <a href="{!! URL::route('admin.banner.getChange', [$item->id,1] ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Ẩn</a>
                     <input type="hidden" name="txtChance" value="1" />
                     @endif
                     
                 </td>
                 <td class="center" align="center">
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.quangcao.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
-                    <a href="{!! URL::route('admin.quangcao.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.banner.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.banner.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>
             @endforeach

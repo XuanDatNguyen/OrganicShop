@@ -124,27 +124,27 @@ Route::group(['prefix' => 'admin'], function() {
 
 
     Route::group(['prefix' => 'khachhang'], function() {
-        Route::get('danhsach',['as'=>'admin.khachhang.list','uses'=>'KhachhangController@getList']);
-        Route::get('them',['as'=>'admin.khachhang.getAdd','uses'=>'KhachhangController@getAdd']);
-        Route::post('them',['as'=>'admin.khachhang.postAdd','uses'=>'KhachhangController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.khachhang.getDelete','uses'=>'KhachhangController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.khachhang.getEdit','uses'=>'KhachhangController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.khachhang.postEdit','uses'=>'KhachhangController@postEdit']);
-        Route::get('xem-lich-su-mua-hang/{id}',['as'=>'admin.khachhang.getHistory','uses'=>'KhachhangController@getHistory']);
+        Route::get('danhsach',['as'=>'admin.customer.index','uses'=>'CustomerController@getList']);
+        Route::get('them',['as'=>'admin.customer.getAdd','uses'=>'CustomerController@getAdd']);
+        Route::post('them',['as'=>'admin.customer.postAdd','uses'=>'CustomerController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.customer.getDelete','uses'=>'CustomerController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.customer.getEdit','uses'=>'CustomerController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.customer.postEdit','uses'=>'CustomerController@postEdit']);
+        Route::get('xem-lich-su-mua-hang/{id}',['as'=>'admin.customer.getHistory','uses'=>'CustomerController@getHistory']);
     });
 
     Route::group(['prefix' => 'baiviet'], function() {
-        Route::get('danhsach',['as'=>'admin.baiviet.list','uses'=>'BaivietController@getList']);
-        Route::get('them',['as'=>'admin.baiviet.getAdd','uses'=>'BaivietController@getAdd']);
-        Route::post('them',['as'=>'admin.baiviet.postAdd','uses'=>'BaivietController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.baiviet.getDelete','uses'=>'BaivietController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.baiviet.getEdit','uses'=>'BaivietController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.baiviet.postEdit','uses'=>'BaivietController@postEdit']);
-        Route::get('them-nguyen-lieu',['as'=>'admin.baiviet.getAddMaterial','uses'=>'BaivietController@getAddMaterial']);
-        Route::post('them-nguyen-lieu',['as'=>'admin.baiviet.postAddMaterial','uses'=>'BaivietController@postAddMaterial']);
-        Route::get('sua-nguyen-lieu/{id}',['as'=>'admin.baiviet.getEditMaterial','uses'=>'BaivietController@getEditMaterial']);
-        Route::post('sua-nguyen-lieu/{id}',['as'=>'admin.baiviet.postEditMaterial','uses'=>'BaivietController@postEditMaterial']);
-        Route::post('ds-nguyen-lieu/{id}',['as'=>'admin.baiviet.listMat','uses'=>'BaivietController@listMat']);
+        Route::get('danhsach',['as'=>'admin.article.index','uses'=>'ArticleController@getList']);
+        Route::get('them',['as'=>'admin.article.getAdd','uses'=>'ArticleController@getAdd']);
+        Route::post('them',['as'=>'admin.article.postAdd','uses'=>'ArticleController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.article.getDelete','uses'=>'ArticleController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.article.getEdit','uses'=>'ArticleController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.article.postEdit','uses'=>'ArticleController@postEdit']);
+        Route::get('them-nguyen-lieu',['as'=>'admin.article.getAddMaterial','uses'=>'ArticleController@getAddMaterial']);
+        Route::post('them-nguyen-lieu',['as'=>'admin.article.postAddMaterial','uses'=>'ArticleController@postAddMaterial']);
+        Route::get('sua-nguyen-lieu/{id}',['as'=>'admin.article.getEditMaterial','uses'=>'ArticleController@getEditMaterial']);
+        Route::post('sua-nguyen-lieu/{id}',['as'=>'admin.article.postEditMaterial','uses'=>'ArticleController@postEditMaterial']);
+        Route::post('ds-nguyen-lieu/{id}',['as'=>'admin.article.listMat','uses'=>'ArticleController@listMat']);
     });
 
     Route::group(['prefix' => 'nhanvien'], function() {
@@ -210,13 +210,13 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'quangcao'], function() {
-        Route::get('danhsach',['as'=>'admin.quangcao.list','uses'=>'QuangcaoController@getList']);
-        Route::get('them',['as'=>'admin.quangcao.getAdd','uses'=>'QuangcaoController@getAdd']);
-        Route::post('them',['as'=>'admin.quangcao.postAdd','uses'=>'QuangcaoController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.quangcao.getDelete','uses'=>'QuangcaoController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.quangcao.getEdit','uses'=>'QuangcaoController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.quangcao.postEdit','uses'=>'QuangcaoController@postEdit']);
-        Route::get('cap-nhat/{id}/{status}',['as'=>'admin.quangcao.getChance','uses'=>'QuangcaoController@getChance']);
+        Route::get('danhsach',['as'=>'admin.banner.index','uses'=>'BannerController@getList']);
+        Route::get('them',['as'=>'admin.banner.getAdd','uses'=>'BannerController@getAdd']);
+        Route::post('them',['as'=>'admin.banner.postAdd','uses'=>'BannerController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.banner.getDelete','uses'=>'BannerController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.banner.getEdit','uses'=>'BannerController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.banner.postEdit','uses'=>'BannerController@postEdit']);
+        Route::get('cap-nhat/{id}/{status}',['as'=>'admin.banner.getChange','uses'=>'BannerController@getChange']);
     });
 });
 

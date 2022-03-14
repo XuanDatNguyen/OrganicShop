@@ -12,7 +12,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.baiviet.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.article.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">
@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label>Tiêu đề</label>
-                <input class="form-control" name="txtMNTittle" value="{!! $bai_viet->monngon_tieu_de !!}"/>
+                <input class="form-control" name="txtMNTittle" value="{!! $article->title !!}"/>
                 <div>
                     {!! $errors->first('txtMNTittle') !!}
                 </div>
@@ -34,7 +34,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label>Tóm tắt</label>
-                <textarea class="form-control" rows="2" name="txtMNResum" placeholder="Mô tả...">{!! $bai_viet->monngon_tom_tat !!}</textarea>
+                <textarea class="form-control" rows="2" name="txtMNResum" placeholder="Mô tả...">{!! $article->summary !!}</textarea>
                 <script type="text/javascript">CKEDITOR.replace('txtMNResum'); </script>
                 <div>
                     {!! $errors->first('txtMNResum') !!}
@@ -44,7 +44,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label>Nội dung</label>
-                <textarea class="form-control" rows="3" name="txtMNContent" placeholder="Mô tả...">{!! $bai_viet->monngon_noi_dung !!}</textarea>
+                <textarea class="form-control" rows="3" name="txtMNContent" placeholder="Mô tả...">{!! $article->description !!}</textarea>
                 <script type="text/javascript">CKEDITOR.replace('txtMNContent'); </script>
                 <div>
                     {!! $errors->first('txtMNContent') !!}
@@ -55,8 +55,8 @@
             <div class="form-group">
                 <label>Ảnh đại diện</label>
                 <br>
-                <img src="{!! asset('images/monngon/'.$bai_viet->monngon_anh) !!}" class="img-responsive img-rounded" alt="Image" style="width: 2000px; height: 200px;">
-                <input type="hidden" name="fImageCurrent" value="{!! $bai_viet->monngon_anh !!}">
+                <img src="{!! asset('images/article/'.$article->image) !!}" class="img-responsive img-rounded" alt="Image" style="width: 2000px; height: 200px;">
+                <input type="hidden" name="fImageCurrent" value="{!! $article->image !!}">
                 <br>
                 <input type="file" name="fImage" >
             </div>
@@ -79,23 +79,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($san_pham1 as $item)
+                    @foreach ($product_1 as $item)
                     <tr>
                         <td>
                             <input type="checkbox" name="products[{!! $item->id !!}]" id="{!! $item->id !!}" value="{!! $item->id !!}" checked="true">
                         </td>
                         <td>
-                            {!! $item->sanpham_ten !!}
+                            {!! $item->name !!}
                         </td>
                     </tr>
                     @endforeach
-                    @foreach ($san_pham2 as $item)
+                    @foreach ($product_2 as $item)
                     <tr>
                         <td>
                             <input type="checkbox" name="products[{!! $item->id !!}]" id="{!! $item->id !!}" value="{!! $item->id !!}">
                         </td>
                         <td>
-                            {!! $item->sanpham_ten !!}
+                            {!! $item->name !!}
                         </td>
                     </tr>
                     @endforeach

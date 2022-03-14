@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class BaivietAddRequest extends Request
+class ArticleAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class BaivietAddRequest extends Request
     public function rules()
     {
         return [
-            'txtMNTittle'  => 'required|unique:monngon,monngon_tieu_de',
+            'txtMNTittle'  => 'required|unique:articles,title',
             'txtMNResum'  => 'required',
             'txtMNContent' => 'required',
             'fImage' => 'required|mimes:jpeg,bmp,png|max:4000'

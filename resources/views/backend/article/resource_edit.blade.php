@@ -1,12 +1,11 @@
 @extends('backend.master')
 @section('title')
-    <h1 class="page-header">Thêm nguyên liệu có sẵn tại cửa hàng</h1>
+    <h1 class="page-header">Sửa nguyên liệu có sẵn tại cửa hàng</h1>
 @stop
 @section('content')
-    <form action="{!! route('admin.monngon.getAddMaterial') !!}" method="POST"  enctype="multipart/form-data">
+    <form action="" method="POST"  enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         <div class="col-lg-7" style="padding-bottom:120px">
-            <input type="hidden" name="txtID" value="{!! $monngon['id'] !!}" placeholder="">
             <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                 <thead>
                     <tr>
@@ -15,13 +14,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($san_pham as $item)
+                    @foreach ($product_1 as $item)
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="products[{!! $item->id !!}]" id="{!! $item->id !!}" value="{!! $item->id !!}" checked="true">
+                        </td>
+                        <td>
+                            {!! $item->name !!}
+                        </td>
+                    </tr>
+                    @endforeach
+                    @foreach ($product_2 as $item)
                     <tr>
                         <td>
                             <input type="checkbox" name="products[{!! $item->id !!}]" id="{!! $item->id !!}" value="{!! $item->id !!}">
                         </td>
                         <td>
-                            {!! $item->sanpham_ten !!}
+                            {!! $item->name !!}
                         </td>
                     </tr>
                     @endforeach
