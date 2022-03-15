@@ -20,19 +20,19 @@
         
                 <div class="aa-blog-content">
                   <div class="row">
-                  @foreach ($bai_viet as $item)
+                  @foreach ($article as $item)
                   <div class="col-md-4 col-sm-4">
                       <article class="aa-latest-blog-single">
                         <figure class="aa-blog-img">                    
-                          <a href="{!! url('bai-viet',$item->monngon_url) !!}"><img src="{!! asset('images/monngon/'.$item->monngon_anh) !!}"  style="width: 450px; height: 220px;"></a>  
+                          <a href="{!! url('bai-viet',$item->slug) !!}"><img src="{!! asset('images/article/'.$item->image) !!}"  style="width: 450px; height: 220px;"></a>  
                             <figcaption class="aa-blog-img-caption">
-                            <span href="{!! url('bai-viet',$item->monngon_url) !!}"><i class="fa fa-clock-o"></i>{!! $item->created_at !!}</span>
+                            <span href="{!! url('bai-viet',$item->slug) !!}"><i class="fa fa-clock-o"></i>{!! $item->created_at !!}</span>
                           </figcaption>                          
                         </figure>
                         <div class="aa-blog-info">
-                          <h3 class="aa-blog-title"><a href="{!! url('bai-viet',$item->monngon_url) !!}">{!! $item->monngon_tieu_de !!}</a></h3>
-                          <p>{!! cut($item->monngon_tom_tat,100) !!}</p> 
-                          <a class="aa-read-mor-btn" href="{!! url('bai-viet',$item->monngon_url) !!}">Xem tiếp <span class="fa fa-long-arrow-right"></span></a>
+                          <h3 class="aa-blog-title"><a href="{!! url('bai-viet',$item->slug) !!}">{!! $item->title !!}</a></h3>
+                          <p>{!! cut($item->summary,100) !!}</p> 
+                          <a class="aa-read-mor-btn" href="{!! url('bai-viet',$item->slug) !!}">Xem tiếp <span class="fa fa-long-arrow-right"></span></a>
                         </div>
                       </article>
                     </div>
@@ -43,19 +43,19 @@
                 <div class="aa-blog-archive-pagination">
                   <nav>
                     <ul class="pagination">
-                    @if ($bai_viet->currentPage() != 1)
+                    @if ($article->currentPage() != 1)
                       <li>
-                        <a href="{!! str_replace('/?','?',$bai_viet->url($bai_viet->currentPage() - 1)) !!}" aria-label="Previous">
+                        <a href="{!! str_replace('/?','?',$article->url($article->currentPage() - 1)) !!}" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
                     @endif
-                    @for ($i = 1; $i <=  $bai_viet->lastPage(); $i++)
-                      <li class="{!! ($bai_viet->currentPage() == $i)? 'active':'' !!}"><a href="{!! str_replace('/?','?',$bai_viet->url($i)) !!}">{!! $i !!}</a></li>
+                    @for ($i = 1; $i <=  $article->lastPage(); $i++)
+                      <li class="{!! ($article->currentPage() == $i)? 'active':'' !!}"><a href="{!! str_replace('/?','?',$article->url($i)) !!}">{!! $i !!}</a></li>
                     @endfor
-                    @if ($bai_viet->currentPage() != $bai_viet->lastPage())
+                    @if ($article->currentPage() != $article->lastPage())
                       <li>
-                        <a href="{!! str_replace('/?','?',$bai_viet->url($bai_viet->currentPage() + 1)) !!}" aria-label="Next">
+                        <a href="{!! str_replace('/?','?',$article->url($article->currentPage() + 1)) !!}" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
                       </li>

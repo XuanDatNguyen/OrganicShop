@@ -2,18 +2,13 @@
 @section('content')
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="{!! url('images/slide/banner_rom.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;">
-   <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Tìm kiếm </h2>
-        <ol class="breadcrumb">
-          <li><a href="{!! url('/') !!}">Home</a></li>
-          <li class="active">Tìm kiếm</li>
-        </ol>
+    <div>
+      <div class="top-bn">
+        <div class="overlay">
+          <h2 style="color: #fff; text-align: center; font-size: 4rem; line-height: 300px ">Có {!! $total !!} kết quả phù hợp</h2>
+        </div>
       </div>
-     </div>
-   </div>
+    </div>
   </section>
   <!-- / catg header banner section -->
   <!-- product category -->
@@ -48,20 +43,20 @@
               </div>
             </div>
             <div class="aa-product-catg-body">
-              @if ($so_luong > 0)
+              @if ($total > 0)
                 <ul class="aa-product-catg">
                 <!-- start single product item -->
-                  @foreach ($sanpham as $item)
+                  @foreach ($product as $item)
                   <li>
                     <figure>
-                      <a class="aa-product-img" href="{!! url('san-pham',$item->sanpham_url) !!}"><img src="{!! asset('images/sanpham/'.$item->sanpham_anh) !!}"  style="width: 250px; height: 300px;"></a>
-                      <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->sanpham_url]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                      <a class="aa-product-img" href="{!! url('san-pham',$item->slug) !!}"><img src="{!! asset('images/products/'.$item->image) !!}"  style="width: 250px; height: 300px;"></a>
+                      <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->slug]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                       <figcaption>
-                        <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->sanpham_url) !!}">{!! $item->sanpham_ten !!}</a></h4>
-                        <span class="aa-product-price">{!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!}vnđ</span>
+                        <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->slug) !!}">{!! $item->name !!}</a></h4>
+                        <span class="aa-product-price">{!! number_format("$item->sale_price",0,",",".") !!}vnđ</span>
                       </figcaption>
                     </figure>                         
-                    @if ($item->sanpham_khuyenmai == 1)
+                    @if ($item->is_promotion == 1)
                         <div class="aa-product-hvr-content">                           
                       </div>
                       <span class="aa-badge aa-sold-out" >Khuyến mãi!</span>                
@@ -86,7 +81,7 @@
           <aside class="aa-sidebar">
              <!-- sidebar  1 -->
             
-            @include('frontend.blocks.spbanchay')
+            @include('frontend.blocks.hot_product')
              <!-- sidebar 2 -->
 
             </aside>

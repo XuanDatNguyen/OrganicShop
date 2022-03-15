@@ -12,17 +12,17 @@
                 <!-- Blog details -->
                 <div class="aa-blog-content aa-blog-details">
                   <article class="aa-blog-content-single">                        
-                    <h2><a href="#">{!! $bai_viet->monngon_tieu_de !!}</a></h2>
+                    <h2><a href="#">{!! $article->title !!}</a></h2>
                      <div class="aa-article-bottom">
                       <div class="aa-post-date">
-                        {!! $bai_viet->created_at !!}
+                        {!! $article->created_at !!}
                       </div>
                     </div>
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="{!! asset('images/monngon/'.$bai_viet->monngon_anh) !!}"  style="width: 500px; height: 300px;"></a>
+                      <a href="#"><img src="{!! asset('images/article/'.$article->image) !!}"  style="width: 500px; height: 300px;"></a>
                     </figure>
-                    <p>{!! $bai_viet->monngon_tom_tat !!}</p>
-                    <p>{!! $bai_viet->monngon_noi_dung !!}</p>
+                    <p>{!! $article->summary !!}</p>
+                    <p>{!! $article->description !!}</p>
                     <div class="blog-single-bottom">
                       <div class="row">
                         <!-- <div class="col-md-8 col-sm-6 col-xs-12">
@@ -60,7 +60,7 @@
                 <aside class="aa-blog-sidebar">
                   <!-- single sidebar -->
           <!-- Nguyên liệu -->
-          @include('frontend.blocks.nguyenlieu')
+          @include('frontend.blocks.resource')
           <!-- /Nguyên liệu -->
           <!-- Bài viết gần đây -->
             @include('frontend.blocks.latest')

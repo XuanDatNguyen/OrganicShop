@@ -7,7 +7,7 @@
    <div class="aa-catg-head-banner-area">
      <div class="container top-bn">
       <div class="aa-catg-head-banner-content">
-        <h2>{!! $products->name !!}</h2>
+        <h2>{!! $product->name !!}</h2>
       </div>
      </div>
    </div>
@@ -16,7 +16,7 @@
     <div>
       <div class="top-bn">
         <div class="overlay">
-          <h2 style="color: #fff; text-align: center; font-size: 4rem; line-height: 300px ">{!! $products->name !!}</h2>
+          <h2 style="color: #fff; text-align: center; font-size: 4rem; line-height: 300px ">{!! $product->name !!}</h2>
         </div>
       </div>
     </div>
@@ -33,34 +33,30 @@
           <!-- Modal view slider -->
           <div class="col-md-5 col-sm-5 col-xs-12">
             <div class="aa-product-view-slider">
-            <a href="{!! asset('images/products/'.$products->image) !!}" class="MagicZoom" id="jeans" data-options="selectorTrigger: hover; transitionEffect: false;">
-            <img src="{!! asset('images/products/'.$products->image) !!}" style="width: 250px; height: 300px;"></a> 
-             <!-- @foreach ($hinhsanpham as $hinh)
-                <a data-zoom-id="jeans" href="{!! asset('images/chitietsanpham/'.$hinh->hinhname) !!}" data-image="{!! asset('resources/upload/chitietsanpham/'.$hinh->hinhname) !!}">
-                <img src="{!! asset('images/chitietsanpham/'.$hinh->hinhname) !!}" style="width: 45px; height: 55px;">
-                </a>
-              @endforeach                               -->
+            <a href="{!! asset('images/products/'.$product->image) !!}" class="MagicZoom" id="jeans" data-options="selectorTrigger: hover; transitionEffect: false;">
+            <img src="{!! asset('images/products/'.$product->image) !!}" style="width: 250px; height: 300px;"></a> 
+                                           
           </div>
           </div>
           <!-- Modal view content -->
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="aa-product-view-content">
-            <h1>{!! $products->name !!}</h1>
+            <h1>{!! $product->name !!}</h1>
             <div class="aa-price-block">
               <h3>
               Giá: 
-              <span class="aa-product-view-price">{!! number_format("$products->sale_price",0,",",".") !!}vnđ</span>
-              <p class="aa-product-avilability">Đơn vị tính: <span>{!! $products->donvitinh_ten !!}</span></p>
+              <span class="aa-product-view-price">{!! number_format("$product->sale_price",0,",",".") !!}vnđ</span>
+              <p class="aa-product-avilability">Đơn vị tính: <span>{!! $product->unit !!}</span></p>
               </h3>
             </div>
             
             <div class="aa-prod-quantity">
               <p class="aa-prod-category">
-              Loại sản phẩm: <a href="{!! url('loai-san-pham',$category->slug) !!}">{!! $products->loainame !!}</a>
+              Loại sản phẩm: <a href="{!! url('loai-san-pham',$category->slug) !!}">{!! $group->name !!}</a>
               </p>
             </div>
             <div class="aa-prod-view-bottom">
-              <a class="aa-add-to-cart-btn" href="{!! url('mua-hang',[$products->id,$products->slug]) !!}"><span class="fa fa-shopping-cart">Mua hàng</a>
+              <a class="aa-add-to-cart-btn" href="{!! url('mua-hang',[$product->id,$product->slug]) !!}"><span class="fa fa-shopping-cart">Mua hàng</a>
             </div>
             </div>
           </div>
@@ -75,7 +71,7 @@
               <!-- Tab panes -->
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="description">
-                  <p>{!! $products->description !!}</p>
+                  <p>{!! $product->description !!}</p>
                   
                 </div>
                 <div class="tab-pane fade " id="review">
@@ -108,7 +104,7 @@
                         Địa chỉ mail của các bạn sẽ không hiện lên và nội dung bình luận sẽ được kiểm tra trước khi phát hành <span class="required">*</span>
                       </p>
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                    <input type="hidden" name="txtID" value="{!! $products->id !!}" />
+                    <input type="hidden" name="txtID" value="{!! $product->id !!}" />
                       <div class="form-group">
                         <label for="message">Nội dung<span class="required">*</span></label>
                         <textarea class="form-control" name="txtContent" rows="3" id="message" required="required"></textarea>

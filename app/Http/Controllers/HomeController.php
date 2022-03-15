@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-//use Illuminate\Http\Request;
-use DB,Cart,Request,Mail;
+use DB,Mail;
+use Cart;
 use App\Donhang;
 use App\Binhluan;
 use App\Chitietdonhang;
+use App\Comment;
+use Illuminate\Support\Str;
 use App\Http\Requests\ThanhtoanRequest;
-use App\Http\Requests\BinhluanRequest;
+use App\Http\Requests\CommentRequest;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
     /**
@@ -76,7 +79,7 @@ class HomeController extends Controller
                                                     'products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
                                             ->groupBy('products.id')
                                             ->paginate(15);
-        return view('frontend.pages.cates',compact('product','categr$category','group'));
+        return view('frontend.pages.cates',compact('product','category','group'));
     }
 
     public function article()
@@ -110,29 +113,32 @@ class HomeController extends Controller
 
     public function product($url)
     {
-        $id   = DB::table('categories')->select('id')->where('slug',$url)->first();
-        $product  = DB::table('products')->where('products.id',$id)
+        $idLSP = DB::table('products')->select('id')->where('slug',$url)->first();
+        $id = $idLSP->id;
+
+        $product = DB::table('products')->where('products.id',$id)
                                         ->join('consignments', 'products.id', '=', 'consignments.product_id')
                                         ->join('units','products.unit_id', '=', 'units.id' )
                                         ->join('categories','products.category_id' , '=', 'categories.id')
-                                        ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name','products.slug','products.is_promotion',
-                                                    'products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
+                                        ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name',
+                                                 'products.slug','products.is_promotion','products.image', 'consignments.qty',
+                                                 'consignments.current_qty','consignments.sale_price','units.name as unit','categories.name',
+                                                 'products.category_id','products.image','products.description'
+                                                 )
                                         ->groupBy('products.id')
                                         ->first();
-        die(print_r($product));
         $category = DB::table('categories')->where('id',$product->category_id)->first();
-        $group    = DB::table('groups')->where('id',$category->group_id)->first();
-        $comment  = DB::table('comments')->where([['product_id',$id],['status',1],])->get();
-
+        $group = DB::table('groups')->where('id',$category->group_id)->first();
+        $comment = DB::table('comments')->where([['product_id',$id],['status',1],])->get();
         return view('frontend.pages.detail_product',compact('product','category','group','comment'));
     }
 
     public function buyding(Request $request,$id)
     {
         // print_r($id);
-        $sanpham = DB::select('select * from sanpham where id = ?',[$id]);
-        // print_r($sanpham);
-        if ($sanpham[0]->is_promotion == 1) {
+        $product = DB::select('select * from sanpham where id = ?',[$id]);
+        // print_r($product);
+        if ($product[0]->is_promotion == 1) {
             $muasanpham = DB::select('select sp.id,sp.name,lh.lohang_ky_hieu, lh.sale_price, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.product_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.product_id = sp.id and sp.id = ?', [$id]);
             $giakm = $muasanpham[0]->sale_price - $muasanpham[0]->sale_price*$muasanpham[0]->khuyenmai_phan_tram*0.01;
             print_r($giakm);
@@ -212,15 +218,15 @@ class HomeController extends Controller
           window.location = '".url('/')."';</script>";
     }
 
-    public function postComment(BinhluanRequest $request)
+    public function postComment(CommentRequest $request)
     {
-        $binhluan = new Binhluan;
-        $binhluan->binhluan_ten = $request->txtName;
-        $binhluan->binhluan_email = $request->txtEmail;
-        $binhluan->binhluan_noi_dung = $request->txtContent;
-        $binhluan->status = 0;
-        $binhluan->product_id = $request->txtID;
-        $binhluan->save();
+        $comment = new Comment();
+        $comment->name = $request->txtName;
+        $comment->email = $request->txtEmail;
+        $comment->content = $request->txtContent;
+        $comment->status = 0;
+        $comment->product_id = $request->txtID;
+        $comment->save();
          echo "<script>
           alert('Cảm ơn bạn đã góp ý!');
           window.location = '".url('/')."';</script>";
@@ -232,18 +238,18 @@ class HomeController extends Controller
         return view('frontend.pages.product');
     }
 
-    public function postFind()
+    public function postFind(Request $request)
     {
-        $keyword = Request::input('txtSearch');
-        $slug = Replace_TiengViet($keyword);
-        // $keyword = Request::input('txtSearch');
-        $sanpham = DB::table('products')
+        $keyword = $request->txtSearch;
+        $slug = Str::slug($keyword);
+
+        $product = DB::table('products')
             ->where('name','like', '%'.$keyword.'%')
-            ->join('lohang', 'sanpham.id', '=', 'lohang.product_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.name','sanpham.slug','sanpham.is_promotion','sanpham.image', 'lohang.qty','lohang.current_qty','lohang.sale_price')
-                ->groupBy('sanpham.id')
+            ->join('consignments', 'products.id', '=', 'consignments.product_id')
+            ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name','products.slug','products.is_promotion','products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
+            ->groupBy('products.id')
             ->paginate(15);
-        $so_luong = $sanpham->total();
-        return view('frontend.pages.product',compact('sanpham', 'keyword', 'so_luong'));
+        $total = $product->total();
+        return view('frontend.pages.product',compact('product', 'keyword', 'total'));
     }
 }

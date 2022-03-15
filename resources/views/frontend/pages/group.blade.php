@@ -25,7 +25,7 @@
               
                 <li>
                   <figure>
-                    <a class="aa-product-img" href="{!! url('san-pham',$item->slug) !!}"><img src="{!! asset('images/product/'.$item->image) !!}"  style="width: 250px; height: 300px;"></a>
+                    <a class="aa-product-img" href="{!! url('san-pham',$item->slug) !!}"><img src="{!! asset('images/products/'.$item->image) !!}"  style="width: 250px; height: 300px;"></a>
                     <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->slug]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->slug) !!}">{!! $item->name !!}</a></h4>
@@ -33,8 +33,7 @@
                       @if ($item->is_promotion == 1) 
                        <!-- product badge -->
 
-                    <span class="aa-badge aa-sold-out" >Khuyến mãi!</span>
-                    <span class="aa-product-price">
+                    
                     
                     <?php 
                       $ty_le_gia = DB::select('SELECT products.id, promotions.percent 
@@ -51,6 +50,8 @@
                           }
                         } 
                       ?> 
+                      <span class="aa-badge aa-sold-out" >Khuyến mại {!! $x !!}%</span>
+                      <span class="aa-product-price">
                       
                         {!! number_format($gia_km,0,",",".") !!} vnđ
                     </span>
@@ -81,7 +82,7 @@
           <aside class="aa-sidebar">
              <!-- sidebar  1 -->
             
-            @include('frontend.blocks.spbanchay')
+            @include('frontend.blocks.hot_product')
              <!-- sidebar 2 -->
           
           </aside>
