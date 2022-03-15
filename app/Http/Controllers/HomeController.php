@@ -27,79 +27,73 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function demo()
-    {
-        $data = DB::table('sanpham')
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
-                ->groupBy('sanpham.id')
-            ->get();
-        // $idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-            print_r($data);
-    }
-
 
 
     public function index()
     {
-        $loaisp =  DB::table('loaisanpham')->get();
-        $sanpham = DB::table('sanpham')
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
-                ->groupBy('sanpham.id')
-                ->orderBy('id','DESC')
-            ->paginate(16);
-        // print_r($loaisp);
-        return view ('frontend.pages.home',compact('loaisp','sanpham'));
+        $category = DB::table('categories')->get();
+        $product  = DB::table('products')->join('consignments', 'products.id', '=', 'consignments.product_id')
+                                         ->select(DB::raw('max(consignments.id) as lomoi'),'products.id',
+                                                     'products.name','products.slug',
+                                                     'products.is_promotion','products.image', 
+                                                     'consignments.qty','consignments.current_qty',
+                                                     'consignments.sale_price')
+                                         ->groupBy('products.id')
+                                         ->orderBy('id','DESC')
+                                         ->paginate(16);
+
+        return view ('frontend.pages.home',compact('category','product'));
     }
+
     public function group($url)
     {
-        $id = DB::table('nhom')->select('id')->where('nhom_url',$url)->first();
-        $i = $id->id;
-        $id = DB::table('loaisanpham')->select('id')->where('nhom_id',$i)->get();
+        $id = DB::table('groups')->select('id')->where('slug',$url)->first();
+        $i  = $id->id;
+        $id = DB::table('categories')->select('id')->where('group_id',$i)->get();
         foreach ($id as $key => $val) {
             $ids[] = $val->id;
         }
-        $nhom = DB::table('nhom')->where('id',$i)->first();
-        $sanpham = DB::table('sanpham')
-            ->whereIn('sanpham.loaisanpham_id',$ids)
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
-            ->groupBy('sanpham.id')
+        $group = DB::table('groups')->where('id',$i)->first();
+        $product = DB::table('products')
+            ->whereIn('products.category_id',$ids)
+            ->join('consignments', 'products.id', '=', 'consignments.product_id')
+            ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name','products.slug','products.is_promotion',
+                     'products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
+            ->groupBy('products.id')
             ->paginate(4);
-        return view('frontend.pages.group',compact('sanpham','nhom'));
+        return view('frontend.pages.group',compact('product','group'));
     }
 
     public function cates($url)
     {
-        $idLSP = DB::table('loaisanpham')->select('id')->where('loaisanpham_url',$url)->first();
-        $i = $idLSP->id;
-        $loaisanpham = DB::table('loaisanpham')->where('id',$i)->first();
-        $sanpham = DB::table('sanpham')
-            ->where('sanpham.loaisanpham_id',$i)
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
-                ->groupBy('sanpham.id')
-            ->paginate(15);
-        $nhom = DB::table('nhom')->where('id',$loaisanpham->nhom_id)->first();
-        return view('frontend.pages.cates',compact('sanpham','loaisanpham','nhom'));
+        $idLSP       = DB::table('categories')->select('id')->where('slug',$url)->first();
+        $i           = $idLSP->id;
+        $category = DB::table('categories')->where('id',$i)->first();
+        $group        = DB::table('groups')->where('id',$category->group_id)->first();
+        $product     = DB::table('products')->where('products.category_id',$i)
+                                            ->join('consignments', 'products.id', '=', 'consignments.product_id')
+                                            ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name','products.slug','products.is_promotion',
+                                                    'products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
+                                            ->groupBy('products.id')
+                                            ->paginate(15);
+        return view('frontend.pages.cates',compact('product','categr$category','group'));
     }
 
     public function article()
     {
-        $bai_viet = DB::table('monngon')->paginate(9);
-        return view ('frontend.pages.baiviet',compact('bai_viet'));
+        $article = DB::table('articles')->paginate(9);
+
+        return view ('frontend.pages.article',compact('article'));
     }
 
     public function detailArticle($url)
     {
-        $bai_viet = DB::table('monngon')->where('monngon_url',$url)->first();
-        $id = DB::table('monngon')->select('id')->where('monngon_url',$url)->first();
-        $id = $id->id;
-        // print_r($i);
-        $nguyen_lieu = DB::table('nguyenlieu')->where('monngon_id',$id)->get();
-        // print_r($nglieu);
-        return view ('frontend.pages.chitietbaiviet',compact('bai_viet','nguyen_lieu'));
+        $article  = DB::table('articles')->where('slug',$url)->first();
+        $id       = DB::table('articles')->select('id')->where('slug',$url)->first();
+        $id       = $id->id;
+        $resource = DB::table('resources')->where('article_id',$id)->get();
+
+        return view ('frontend.pages.detail_article',compact('article','resource'));
     }
 
     public function getContact()
@@ -109,87 +103,28 @@ class HomeController extends Controller
 
     public function postContact(Request $request)
     {
-        $data = ['mail'=>Request::input('txtMail'),'name'=>Request::input('txtName'),'content'=>Request::input('txtContent')];
-        $f_data = ['mail'=>'test@gmail.com', 'name'=>'test', 'content'=>'content'];
-        Mail::send('auth.emails.layoutmail', $f_data, function ($message) {
-            $message->from('0rganicshop.cskh@gmail.com', 'Khách hàng');
-        
-            $message->to('nguyenxuandat.bqp@gmail.com', 'Admin');
-        
-            $message->subject('Mail liên hệ!!!');
-        });
-
-        echo "<script>
-         alert('Cảm ơn bạn đã góp ý! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất');
-         window.location='".url('/')."'
-        </script>";
+       
     }
 
-    public function testSendEmail() {
 
-        Mail::send('auth.emails.layoutmail', ['name' => 'test'], function($message) {
-            $message->from('0rganicshop.cskh@gmail.com');
-        
-            $message->to('nguyenxuandat.bqp@gmail.com');
-        
-            $message->subject('Mail liên hệ!!!');
-        });
-    }
-
-    public function promotions()
-    {
-        $khuyenmai = DB::table('khuyenmai')->where('khuyenmai_tinh_trang',1)->first();
-        if (!is_null($khuyenmai)) {
-            $spham = DB::table('sanphamkhuyenmai')
-            ->where('khuyenmai_id',$khuyenmai->id)
-            ->get();
-        } else {
-            $spham = Null;
-        }
-        // print_r($km_old);
-        return view ('frontend.pages.promotion',compact('khuyenmai','spham'));
-    }
-
-    public function detailpromotions($url)
-    {
-        $khuyenmai = DB::table('khuyenmai')->where('khuyenmai_url',$url)->first();
-        $id = DB::table('khuyenmai')->select('id')->where('khuyenmai_url',$url)->first();
-        $id = $id->id;
-        // print_r($i);
-        $spham = DB::table('sanphamkhuyenmai')
-            ->where('khuyenmai_id',$id)
-            ->get();
-        //$spham = DB::table('sanpham')->whereIn('id',$sphamid)->get();
-        //print_r($spham);
-        return view ('frontend.pages.detailpromotion',compact('khuyenmai','spham'));
-    }
-
-    public function career()
-    {
-        $tuyendung = DB::table('tuyendung')->where('tuyendung_tinh_trang',1)->first();
-        // print_r($tuyendung);
-        return view('frontend.pages.career',compact('tuyendung'));
-    }
 
     public function product($url)
     {
-        $idLSP = DB::table('sanpham')->select('id')->where('sanpham_url',$url)->first();
-        $id = $idLSP->id;
-        $sanpham = DB::table('sanpham')
-            ->where('sanpham.id',$id)
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->join('donvitinh','sanpham.donvitinh_id', '=', 'donvitinh.id' )
-            ->join('loaisanpham','sanpham.loaisanpham_id' , '=', 'loaisanpham.id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra','donvitinh.donvitinh_ten','loaisanpham.loaisanpham_ten','sanpham.loaisanpham_id','sanpham.sanpham_anh','sanpham.sanpham_mo_ta')
-            ->groupBy('sanpham.id')
-            ->first();
-        
-        $hinhsanpham = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
-        $loaisanpham = DB::table('loaisanpham')->where('id',$sanpham->loaisanpham_id)->first();
-        $nhom = DB::table('nhom')->where('id',$loaisanpham->nhom_id)->first();
-        $binhluan = DB::table('binhluan')->where([['sanpham_id',$id],['binhluan_trang_thai',1],])->get();
-        return view('frontend.pages.detailpro',compact('sanpham','hinhsanpham','loaisanpham','nhom','binhluan'));
-        // print_r($loaisanpham);
+        $id   = DB::table('categories')->select('id')->where('slug',$url)->first();
+        $product  = DB::table('products')->where('products.id',$id)
+                                        ->join('consignments', 'products.id', '=', 'consignments.product_id')
+                                        ->join('units','products.unit_id', '=', 'units.id' )
+                                        ->join('categories','products.category_id' , '=', 'categories.id')
+                                        ->select(DB::raw('max(consignments.id) as lomoi'),'products.id','products.name','products.slug','products.is_promotion',
+                                                    'products.image', 'consignments.qty','consignments.current_qty','consignments.sale_price')
+                                        ->groupBy('products.id')
+                                        ->first();
+        die(print_r($product));
+        $category = DB::table('categories')->where('id',$product->category_id)->first();
+        $group    = DB::table('groups')->where('id',$category->group_id)->first();
+        $comment  = DB::table('comments')->where([['product_id',$id],['status',1],])->get();
+
+        return view('frontend.pages.detail_product',compact('product','category','group','comment'));
     }
 
     public function buyding(Request $request,$id)
@@ -197,15 +132,15 @@ class HomeController extends Controller
         // print_r($id);
         $sanpham = DB::select('select * from sanpham where id = ?',[$id]);
         // print_r($sanpham);
-        if ($sanpham[0]->sanpham_khuyenmai == 1) {
-            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?', [$id]);
-            $giakm = $muasanpham[0]->lohang_gia_ban_ra - $muasanpham[0]->lohang_gia_ban_ra*$muasanpham[0]->khuyenmai_phan_tram*0.01;
+        if ($sanpham[0]->is_promotion == 1) {
+            $muasanpham = DB::select('select sp.id,sp.name,lh.lohang_ky_hieu, lh.sale_price, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.product_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.product_id = sp.id and sp.id = ?', [$id]);
+            $giakm = $muasanpham[0]->sale_price - $muasanpham[0]->sale_price*$muasanpham[0]->khuyenmai_phan_tram*0.01;
             print_r($giakm);
-            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $giakm));
+            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->name, 'qty' => 1, 'price' => $giakm));
         } else {
-            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?',[$id]);
-            $gia = $muasanpham[0]->lohang_gia_ban_ra;
-            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $gia));
+            $muasanpham = DB::select('select sp.id,sp.name,lh.lohang_ky_hieu, lh.sale_price from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.product_id = sp.id and sp.id = ?',[$id]);
+            $gia = $muasanpham[0]->sale_price;
+            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->name, 'qty' => 1, 'price' => $gia));
         }
         $content = Cart::content();
         // print_r($content);
@@ -264,7 +199,7 @@ class HomeController extends Controller
 
         foreach ($content as $item) {
             $detail = new Chitietdonhang;
-            $detail->sanpham_id = $item->id;
+            $detail->product_id = $item->id;
             $detail->donhang_id = $donhang->id;
             $detail->chitietdonhang_so_luong = $item->qty;
             $detail->chitietdonhang_thanh_tien = $item->price*$item->qty;
@@ -283,8 +218,8 @@ class HomeController extends Controller
         $binhluan->binhluan_ten = $request->txtName;
         $binhluan->binhluan_email = $request->txtEmail;
         $binhluan->binhluan_noi_dung = $request->txtContent;
-        $binhluan->binhluan_trang_thai = 0;
-        $binhluan->sanpham_id = $request->txtID;
+        $binhluan->status = 0;
+        $binhluan->product_id = $request->txtID;
         $binhluan->save();
          echo "<script>
           alert('Cảm ơn bạn đã góp ý!');
@@ -302,10 +237,10 @@ class HomeController extends Controller
         $keyword = Request::input('txtSearch');
         $slug = Replace_TiengViet($keyword);
         // $keyword = Request::input('txtSearch');
-        $sanpham = DB::table('sanpham')
-            ->where('sanpham_ten','like', '%'.$keyword.'%')
-            ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+        $sanpham = DB::table('products')
+            ->where('name','like', '%'.$keyword.'%')
+            ->join('lohang', 'sanpham.id', '=', 'lohang.product_id')
+            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.name','sanpham.slug','sanpham.is_promotion','sanpham.image', 'lohang.qty','lohang.current_qty','lohang.sale_price')
                 ->groupBy('sanpham.id')
             ->paginate(15);
         $so_luong = $sanpham->total();

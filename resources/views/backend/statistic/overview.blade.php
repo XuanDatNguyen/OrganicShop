@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.thongke.nhapvao') !!}">
+            <a href="{!! URL::route('admin.statistic.nhapvao') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.thongke.banra') !!}">
+            <a href="{!! URL::route('admin.statistic.banra') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.thongke.hienco') !!}">
+            <a href="{!! URL::route('admin.statistic.hienco') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.thongke.doitra') !!}">
+            <a href="{!! URL::route('admin.statistic.doitra') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -122,13 +122,13 @@
                         
                         @foreach ($bannhieu as $item)
                             <tr>
-                            <?php $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first(); ?>
-                            <td>{!! $item->sanpham_id !!}</td>
-                            <td>{!! $sp->sanpham_ten !!}</td>
+                            <?php $sp = DB::table('products')->where('id',$item->product_id)->first(); ?>
+                            <td>{!! $item->product_id !!}</td>
+                            <td>{!! $sp->name !!}</td>
                             <td><button type="button" class="btn btn-info btn-xs">{!! $item->ban !!}</button></td>
                             <td><button type="button" class="btn btn-warning btn-xs">{!! $item->ton !!}</button></td>
                             <td class="center">
-                            <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->sanpham_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
+                            <a href="{!! URL::route('admin.consignment.getNhaphang', [$item->product_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -141,7 +141,7 @@
             <div class="panel-footer">
                 <div class="input-group">
                     <span class="input-group-btn">
-                         <a href="{!! URL::route('admin.thongke.banchay') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
+                         <a href="{!! URL::route('admin.statistic.banchay') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
                     </span>
                 </div>
             </div>
@@ -173,13 +173,13 @@
                         
                         @foreach ($tonnhieu as $item)
                             <tr>
-                            <?php $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first(); ?>
-                            <td>{!! $item->sanpham_id !!}</td>
-                            <td>{!! $sp->sanpham_ten !!}</td>
+                            <?php $sp = DB::table('products')->where('id',$item->product_id)->first(); ?>
+                            <td>{!! $item->product_id !!}</td>
+                            <td>{!! $sp->name !!}</td>
                             <td><button type="button" class="btn btn-info btn-xs">{!! $item->ban !!}</button></td>
                             <td><button type="button" class="btn btn-warning btn-xs">{!! $item->ton !!}</button></td>
                             <td class="center">
-                            <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->sanpham_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
+                            <a href="{!! URL::route('admin.consignment.getNhaphang', [$item->product_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -192,7 +192,7 @@
             <div class="panel-footer">
                 <div class="input-group">
                     <span class="input-group-btn">
-                         <a href="{!! URL::route('admin.thongke.tonnhieu') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
+                         <a href="{!! URL::route('admin.statistic.tonnhieu') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
                     </span>
                 </div>
             </div>
@@ -255,13 +255,13 @@
                         
                         @foreach ($hethan as $item)
                             <tr>
-                            <?php $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first(); ?>
-                            <td>{!! $item->sanpham_id !!}</td>
-                            <td>{!! $sp->sanpham_ten !!}</td>
+                            <?php $sp = DB::table('products')->where('id',$item->product_id)->first(); ?>
+                            <td>{!! $item->product_id !!}</td>
+                            <td>{!! $sp->name !!}</td>
                             <td><button type="button" class="btn btn-info btn-xs">{!! $item->ban !!}</button></td>
                             <td><button type="button" class="btn btn-warning btn-xs">{!! $item->ton !!}</button></td>
                             <td class="center">
-                            <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->sanpham_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
+                            <a href="{!! URL::route('admin.consignment.getNhaphang', [$item->product_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -272,7 +272,7 @@
             <div class="panel-footer">
                 <div class="input-group">
                     <span class="input-group-btn">
-                         <a href="{!! URL::route('admin.thongke.hethan') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
+                         <a href="{!! URL::route('admin.statistic.hethan') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
                     </span>
                 </div>
             </div>
@@ -336,13 +336,13 @@
                     <tbody>
                         @foreach ($conhan as $item)
                             <tr>
-                            <?php $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first(); ?>
-                            <td>{!! $item->sanpham_id !!}</td>
-                            <td>{!! $sp->sanpham_ten !!}</td>
+                            <?php $sp = DB::table('products')->where('id',$item->product_id)->first(); ?>
+                            <td>{!! $item->product_id !!}</td>
+                            <td>{!! $sp->name !!}</td>
                             <td><button type="button" class="btn btn-info btn-xs">{!! $item->ban !!}</button></td>
                             <td><button type="button" class="btn btn-warning btn-xs">{!! $item->ton !!}</button></td>
                             <td class="center">
-                            <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->sanpham_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
+                            <a href="{!! URL::route('admin.consignment.getNhaphang', [$item->product_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -353,7 +353,7 @@
             <div class="panel-footer">
                 <div class="input-group">
                     <span class="input-group-btn">
-                         <a href="{!! URL::route('admin.thongke.conhan') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
+                         <a href="{!! URL::route('admin.statistic.conhan') !!}" class="btn btn-default" type="button">Xem chi tiết</a>
                     </span>
                 </div>
             </div>

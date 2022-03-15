@@ -1,7 +1,7 @@
 @extends('backend.master')
 @section('title')
 <h3 class="page-header ">
-    <a href="{!! URL::route('admin.thongke.list') !!}" style="color:blue;"><i class="fa fa-product-hunt" style="color:blue;">Kho hàng</i></a>
+    <a href="{!! URL::route('admin.statistic.index') !!}" style="color:green;"><i class="fa fa-product-hunt" style="color:green;">Kho hàng</i></a>
     /{{ $title}}
     </h3>
 @stop
@@ -16,7 +16,6 @@
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
             <tr align="center">
-                <th>Ký hiệu</th>
                 <th>Tên</th>
                 <th>Loại</th>
                 <th>ĐVT</th>
@@ -30,22 +29,21 @@
             @foreach ($data as $item)
             <tr class="odd gradeX" align="left">
             <?php  
-                $sanpham = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                $product = DB::table('products')->where('id',$item->product_id)->first();
             ?>
-                <td>{!! $sanpham->sanpham_ky_hieu !!}</td>
-                <td>{!! $sanpham->sanpham_ten !!}</td>
+                <td>{!! $product->name !!}</td>
                 <td>
-                    <?php $loaisanpham = DB::table('loaisanpham')->where('id',$sanpham->loaisanpham_id)->first(); ?>
-                    @if (!empty($loaisanpham->loaisanpham_ten))
-                        {!! $loaisanpham->loaisanpham_ten !!}
+                    <?php $category = DB::table('categories')->where('id',$product->category_id)->first(); ?>
+                    @if (!empty($category->name))
+                        {!! $category->name !!}
                     @else
                         {!! NULL !!}
                     @endif
                 </td>
                 <td>
-                    <?php $donvitinh = DB::table('donvitinh')->where('id',$sanpham->donvitinh_id)->first(); ?>
-                    @if (!empty($donvitinh->donvitinh_ten))
-                        {!! $donvitinh->donvitinh_ten !!}
+                    <?php $unit = DB::table('units')->where('id',$product->unit_id)->first(); ?>
+                    @if (!empty($unit->name))
+                        {!! $unit->name !!}
                     @else
                         {!! NULL !!}
                     @endif
@@ -54,7 +52,7 @@
                 <td>{!! $item->ban !!}</td>
                 <td>{!! $item->ton !!}</td>
                 <td class="center">
-                <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->sanpham_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
+                <a href="{!! URL::route('admin.consignment.getNhaphang', [$item->product_id] ) !!}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>
                 </td>
             </tr>
             @endforeach

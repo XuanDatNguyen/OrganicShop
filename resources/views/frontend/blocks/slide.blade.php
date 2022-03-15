@@ -8,12 +8,12 @@
               <ul class="seq-canvas">
                 <!-- single slide item -->
                 <?php 
-                $data = DB::table('quangcao')->where('quangcao_trang_thai',1)->get();
+                $data = DB::table('banners')->where('status',1)->get();
                 ?>
                 @foreach ($data as $item)
                 <li>
                   <div class="seq-model">
-                    <img data-seq src="{!! asset('images/slide/' . $item->quangcao_anh) !!}" alt="slide" style="height: 320px;"/>
+                    <img data-seq src="{!! asset('images/banner/' . $item->image) !!}" alt="slide" style="height: 320px;"/>
                   </div>
                 </li>
                 @endforeach              

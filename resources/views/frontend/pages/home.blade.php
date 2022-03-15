@@ -21,31 +21,29 @@
                         <div class="tab-pane fade in active" >
                           <ul class="aa-product-catg">
                             <!-- start single product item -->
-                            @foreach ($sanpham as $item)
-                              <?php 
-                                $sanphamkhuyenmai = DB::select('select* from sanpham as sp, sanphamkhuyenmai as spkm, khuyenmai as km where sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and sp.sanpham_khuyenmai = 1 and km.khuyenmai_tinh_trang = 1');
-                              ?>
+                            @foreach ($product as $item)
+                              
                               <li>
                                 <figure>
-                                  <a class="aa-product-img" href="{!! url('san-pham',$item->sanpham_url) !!}"><img src="{!! asset('images/sanpham/' . $item->sanpham_anh) !!}" style="width: 250px; heigh: 300px" ></a>
-                                  <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->sanpham_url]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                                  <a class="aa-product-img" href="{!! url('san-pham',$item->slug) !!}"><img src="{!! asset('images/products/' . $item->image) !!}" style="width: 250px; heigh: 300px" ></a>
+                                  <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->slug]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                                   <figcaption>
-                                    <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->sanpham_url) !!}">{!! $item->sanpham_ten !!}</a></h4>
+                                    <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->slug) !!}">{!! $item->name !!}</a></h4>
                                     <input type="hidden" name="txtqty" value="1" />
-                                    @if ($item->sanpham_khuyenmai == 1) 
+                                    @if ($item->is_promotion == 1) 
                                     <!-- product badge -->
                                     <?php 
-                                      $ty_le_gia = DB::select('SELECT sanpham.id, khuyenmai.khuyenmai_phan_tram 
-                                                            FROM `sanphamkhuyenmai` 
-                                                            INNER JOIN sanpham 
-                                                              ON sanpham.id = sanphamkhuyenmai.sanpham_id 
-                                                            INNER JOIN khuyenmai 
-                                                              ON khuyenmai.id = sanphamkhuyenmai.khuyenmai_id 
-                                                            WHERE sanpham.sanpham_khuyenmai = 1 AND khuyenmai.khuyenmai_tinh_trang = 1');
+                                      $ty_le_gia = DB::select('SELECT products.id, promotions.percent 
+                                                            FROM `promotional_products` 
+                                                            INNER JOIN products 
+                                                              ON products.id = promotional_products.product_id 
+                                                            INNER JOIN promotions 
+                                                              ON promotions.id = promotional_products.promotion_id 
+                                                            WHERE products.is_promotion = 1 AND promotions.status = 1');
                                         foreach($ty_le_gia as $phan_tram) {
                                           if($item->id == $phan_tram->id) {
-                                            $gia_km = ($item->lohang_gia_ban_ra - ($item->lohang_gia_ban_ra*$phan_tram->khuyenmai_phan_tram*0.01));
-                                            $x = $phan_tram->khuyenmai_phan_tram;
+                                            $gia_km = ($item->sale_price - ($item->sale_price*$phan_tram->percent*0.01));
+                                            $x = $phan_tram->percent;
                                           }
                                         } 
                                       ?> 
@@ -55,12 +53,12 @@
                                       {!! number_format($gia_km,0,",",".") !!} vnđ
                                   </span>
                                   <span class="aa-product-price">
-                                  <del>{!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!} vnđ</del>
+                                  <del>{!! number_format("$item->sale_price",0,",",".") !!} vnđ</del>
                                   </span> 
                                   <input type="hidden" name="txtopt" value="" /> 
                                   @else
                                       <span class="aa-product-price">
-                                      {!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!} vnđ
+                                      {!! number_format("$item->sale_price",0,",",".") !!} vnđ
                                       </span>
                                       <input type="hidden" name="txtopt" value="1" /> 
                                   @endif

@@ -118,7 +118,7 @@
                         </li>
 
                         <li>
-                            <a href="{!! URL::route('admin.thongke.list') !!}"><i class="fa fa-cubes"></i> Kho hàng</a>
+                            <a href="{!! URL::route('admin.statistic.index') !!}"><i class="fa fa-cubes"></i> Kho hàng</a>
                         </li>
                     </ul>
                 </div>

@@ -13,10 +13,10 @@
                   <ul class="aa-footer-nav">
                     <li><a href="{!! url('/') !!}">Trang chủ</a></li>
                     <?php 
-                      $nhom =  DB::table('nhom')->get();
+                      $group =  DB::table('groups')->get();
                      ?>
-                     @foreach ($nhom as $menu_1)
-                      <li><a href="{!! url('nhom-thuc-pham',$menu_1->nhom_url) !!}">{!! $menu_1->nhom_ten !!}</a>
+                     @foreach ($group as $menu_1)
+                      <li><a href="{!! url('nhom-thuc-pham',$menu_1->slug) !!}">{!! $menu_1->name !!}</a>
                       </li>
                       @endforeach
                   </ul>

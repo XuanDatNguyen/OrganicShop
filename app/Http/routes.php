@@ -196,15 +196,15 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'thongke'], function() {
-        Route::get('tong-quan',['as'=>'admin.thongke.list','uses'=>'ThongkeController@getList']);
-        Route::get('san-pham-nhap-vao',['as'=>'admin.thongke.nhapvao','uses'=>'ThongkeController@getNhapvao']);
-        Route::get('san-pham-ban-ra',['as'=>'admin.thongke.banra','uses'=>'ThongkeController@getBanra']);
-        Route::get('san-pham-hien-co',['as'=>'admin.thongke.hienco','uses'=>'ThongkeController@getHienco']);
-        Route::get('san-pham-doi-tra',['as'=>'admin.thongke.doitra','uses'=>'ThongkeController@getDoitra']);
-        Route::get('san-pham-ban-chay',['as'=>'admin.thongke.banchay','uses'=>'ThongkeController@getBanchay']);
-        Route::get('san-pham-ton-nhieu',['as'=>'admin.thongke.tonnhieu','uses'=>'ThongkeController@getTonnhieu']);
-        Route::get('san-pham-het-han',['as'=>'admin.thongke.hethan','uses'=>'ThongkeController@getHethan']);
-        Route::get('san-pham-con-han',['as'=>'admin.thongke.conhan','uses'=>'ThongkeController@getConhan']);
+        Route::get('tong-quan',['as'=>'admin.statistic.index','uses'=>'StatisticController@getList']);
+        Route::get('san-pham-nhap-vao',['as'=>'admin.statistic.nhapvao','uses'=>'StatisticController@getNhapvao']);
+        Route::get('san-pham-ban-ra',['as'=>'admin.statistic.banra','uses'=>'StatisticController@getBanra']);
+        Route::get('san-pham-hien-co',['as'=>'admin.statistic.hienco','uses'=>'StatisticController@getHienco']);
+        Route::get('san-pham-doi-tra',['as'=>'admin.statistic.doitra','uses'=>'StatisticController@getDoitra']);
+        Route::get('san-pham-ban-chay',['as'=>'admin.statistic.banchay','uses'=>'StatisticController@getBanchay']);
+        Route::get('san-pham-ton-nhieu',['as'=>'admin.statistic.tonnhieu','uses'=>'StatisticController@getTonnhieu']);
+        Route::get('san-pham-het-han',['as'=>'admin.statistic.hethan','uses'=>'StatisticController@getHethan']);
+        Route::get('san-pham-con-han',['as'=>'admin.statistic.conhan','uses'=>'StatisticController@getConhan']);
     });
 
     Route::group(['prefix' => 'quangcao'], function() {
