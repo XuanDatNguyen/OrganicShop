@@ -179,21 +179,20 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
     Route::group(['prefix' => 'binhluan'], function() {
-        Route::get('danhsach',['as'=>'admin.binhluan.list','uses'=>'BinhluanController@getList']);
-        Route::get('xoa/{id}',['as'=>'admin.binhluan.getDelete','uses'=>'BinhluanController@getDelete']);
-        Route::get('chap-nhan/{id}',['as'=>'admin.binhluan.getEdit','uses'=>'BinhluanController@getEdit']);
-        Route::get('khong-chap-nhan/{id}',['as'=>'admin.binhluan.getEdit1','uses'=>'BinhluanController@getEdit1']);
+        Route::get('danhsach',['as'=>'admin.comment.index','uses'=>'CommentController@getList']);
+        Route::get('xoa/{id}',['as'=>'admin.comment.getDelete','uses'=>'CommentController@getDelete']);
+        Route::get('chap-nhan/{id}',['as'=>'admin.comment.getEdit','uses'=>'CommentController@getEdit']);
+        Route::get('khong-chap-nhan/{id}',['as'=>'admin.comment.getEdit1','uses'=>'CommentController@getEdit1']);
     });
 
     Route::group(['prefix' => 'donhang'], function() {
-        Route::get('danhsach',['as'=>'admin.donhang.list','uses'=>'DonhangController@getList']);
-        Route::get('xem-don-hang/{id}',['as'=>'admin.donhang.getEdit','uses'=>'DonhangController@getEdit']);
-        Route::post('xem-don-hang/{id}',['as'=>'admin.donhang.postEdit','uses'=>'DonhangController@postEdit']);
-        Route::get('sua-thong-tin-giao-hang/{id}',['as'=>'admin.donhang.getEdit1','uses'=>'DonhangController@getEdit1']);
-        Route::post('sua-thong-tin-giao-hang/{id}',['as'=>'admin.donhang.postEdit1','uses'=>'DonhangController@postEdit1']);
-        Route::get('sua-thong-tin-thanh-toan/{id}',['as'=>'admin.donhang.getEdit2','uses'=>'DonhangController@getEdit2']);
-        Route::post('sua-thong-tin-thanh-toan/{id}',['as'=>'admin.donhang.postEdit2','uses'=>'DonhangController@postEdit2']);
-        Route::get('in-hoa-don/{id}',['as'=>'admin.donhang.pdf','uses'=>'DonhangController@pdf']);
+        Route::get('danhsach',['as'=>'admin.order.index','uses'=>'OrderController@getList']);
+        Route::get('xem-don-hang/{id}',['as'=>'admin.order.getEdit','uses'=>'OrderController@getEdit']);
+        Route::post('xem-don-hang/{id}',['as'=>'admin.order.postEdit','uses'=>'OrderController@postEdit']);
+        Route::get('sua-thong-tin-giao-hang/{id}',['as'=>'admin.order.getEdit1','uses'=>'OrderController@getEdit1']);
+        Route::post('sua-thong-tin-giao-hang/{id}',['as'=>'admin.order.postEdit1','uses'=>'OrderController@postEdit1']);
+        Route::get('sua-thong-tin-thanh-toan/{id}',['as'=>'admin.order.getEdit2','uses'=>'OrderController@getEdit2']);
+        Route::post('sua-thong-tin-thanh-toan/{id}',['as'=>'admin.order.postEdit2','uses'=>'OrderController@postEdit2']);
     });
 
     Route::group(['prefix' => 'thongke'], function() {

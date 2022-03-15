@@ -12,12 +12,12 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{$luotbinhluan}}</div>
+                        <div class="huge">{{$newComments}}</div>
                         <div>Bình luận mới!</div>
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.binhluan.list') !!}">
+            <a href="{!! URL::route('admin.comment.index') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -34,12 +34,12 @@
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{$khachhang}}</div>
+                        <div class="huge">{{$customers}}</div>
                         <div>Khách hàng!</div>
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.khachhang.list') !!}">
+            <a href="{!! URL::route('admin.customer.index') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -56,12 +56,12 @@
                         <i class="fa fa-shopping-cart fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{$donhang}}</div>
+                        <div class="huge">{{$newOrders}}</div>
                         <div>Đơn hàng mới!</div>
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.donhang.list') !!}">
+            <a href="{!! URL::route('admin.order.index') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -78,12 +78,12 @@
                         <i class="fa fa-barcode fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{$sanpham}}</div>
+                        <div class="huge">{{$products}}</div>
                         <div>Sản phẩm</div>
                     </div>
                 </div>
             </div>
-            <a href="{!! URL::route('admin.sanpham.list') !!}">
+            <a href="{!! URL::route('admin.product.index') !!}">
                 <div class="panel-footer">
                     <span class="pull-left">Xem chi tiết</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -109,7 +109,7 @@
             <!-- So do so luong san pham hang thang -->
             <?php
                 //tổng sl theo từng tháng
-                $sp = DB::select('select sum(lohang_so_luong_nhap) as nhap,sum(lohang_so_luong_da_ban) as ban,sum(lohang_so_luong_doi_tra) as tra,MONTH(created_at) as thang from lohang group By MONTH(created_at)');
+                $sp = DB::select('select sum(qty) as nhap,sum(sold_qty) as ban,sum(change_qty) as tra,MONTH(created_at) as thang from consignments group By MONTH(created_at)');
                 for ($i= 0; $i < count($sp) ; $i++) {
                     $keys[] = 'Tháng '. $sp[$i]->thang;
                     $val[] = array($sp[$i]->nhap,$sp[$i]->ban,$sp[$i]->tra);
@@ -125,7 +125,7 @@
         <!-- /.panel -->
     </div>
 
-    @include('backend.blocks.doanhthu')
+    
 </div>
 <!-- /.row -->
 

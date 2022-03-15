@@ -107,7 +107,7 @@ class AuthController extends Controller
             return redirect()->route('admin.index');
         }
         else {
-            return redirect()->back();
+            return redirect()->back()->with(['flash_level'=>'warning','flash_message'=>'Sai thông tin đăng nhập!!!']);
         }
         
     }

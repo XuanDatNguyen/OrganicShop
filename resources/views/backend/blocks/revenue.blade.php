@@ -37,16 +37,15 @@
                                         </thead>
                                         <tbody>
                                         <?php $count = 0; ?>
-                                        @foreach ($bannhieu as $item)
+                                        @foreach ($sell_a_lots as $item)
                                         <?php 
-                                            $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                                            $sp = DB::table('products')->where('id',$item->product_id)->first();
                                             $count = $count +1;
                                         ?>
                                             <tr>
                                                 <td>{!! $count !!}</td>
-                                                <td>{!! $sp->sanpham_ky_hieu !!}</td>
-                                                <td>{!! $sp->sanpham_ten !!}</td>
-                                                <td>{!! $item->ban !!}</td>
+                                                <td>{!! $sp->name !!}</td>
+                                                <td>{!! $item->sell !!}</td>
                                                 <td>{!! number_format("$item->tien",0,",",".")  !!}vnđ</td>
                                             </tr>
                                         @endforeach 
@@ -68,13 +67,12 @@
                                         <?php $count = 0; ?>
                                         @foreach ($nhapnhieu as $item)
                                         <?php 
-                                            $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                                            $sp = DB::table('products')->where('id',$item->product_id)->first();
                                             $count = $count +1;
                                         ?>
                                             <tr>
                                                 <td>{!! $count !!}</td>
-                                                <td>{!! $sp->sanpham_ky_hieu !!}</td>
-                                                <td>{!! $sp->sanpham_ten !!}</td>
+                                                <td>{!! $sp->name !!}</td>
                                                 <td>{!! $item->nhap !!}</td>
                                                 <td>{!! number_format("$item->tien",0,",",".")  !!}vnđ</td>
                                             </tr>

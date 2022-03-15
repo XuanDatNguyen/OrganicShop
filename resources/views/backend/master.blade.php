@@ -98,11 +98,11 @@
                         </li>
                         
                         <li>
-                            <a href="{!! URL::route('admin.donhang.list') !!}"><i class="fa fa-file-text"></i> Đơn hàng</a>
+                            <a href="{!! URL::route('admin.order.index') !!}"><i class="fa fa-file-text"></i> Đơn hàng</a>
                         </li>
 
                         <li>
-                            <a href="{!! URL::route('admin.binhluan.list') !!}"><i class="fa fa-comments-o"></i> Bình luận</a>
+                            <a href="{!! URL::route('admin.comment.index') !!}"><i class="fa fa-comments-o"></i> Bình luận</a>
                         </li>
 
                         <li>

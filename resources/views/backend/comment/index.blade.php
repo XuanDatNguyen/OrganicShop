@@ -38,16 +38,16 @@
                     <td>{!! $item->id !!}</td>
                     <td>
                         <?php 
-                            $sanpham = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                            $product = DB::table('products')->where('id',$item->product_id)->first();
 
                         ?>
-                        {!! $sanpham->sanpham_ten !!}
+                        {!! $product->name !!}
                     </td>
                     <td>{!! date("d-m-Y",strtotime($item->created_at)) !!}</td>
-                    <td>{!! $item->binhluan_noi_dung !!}</td>
+                    <td>{!! $item->content !!}</td>
                     
                     <td align="center">
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.binhluan.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.comment.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -75,16 +75,16 @@
                     <td>{!! $item->id !!}</td>
                     <td>
                         <?php 
-                            $sanpham = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                            $product = DB::table('products')->where('id',$item->product_id)->first();
 
                         ?>
-                        {!! $sanpham->sanpham_ten !!}
+                        {!! $product->name !!}
                     </td>
                     <td>{!! date("d-m-Y",strtotime($item->created_at)) !!}</td>
-                    <td>{!! $item->binhluan_noi_dung !!}</td>
+                    <td>{!! $item->content !!}</td>
                     <td>
-                    <a href="{!! URL::route('admin.binhluan.getEdit', $item->id ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Chấp nhận"><i class="fa fa-check-square-o"></i></a>
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.binhluan.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.comment.getEdit', $item->id ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Chấp nhận"><i class="fa fa-check-square-o"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.comment.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -114,19 +114,19 @@
                     <td>{!! $item->id !!}</td>
                     <td>
                         <?php 
-                            $sanpham = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                            $product = DB::table('products')->where('id',$item->product_id)->first();
 
                         ?>
-                        {!! $sanpham->sanpham_ten !!}
+                        {!! $product->name !!}
                     </td>
                     <td>{!! date("d-m-Y",strtotime($item->created_at)) !!}</td>
-                    <td>{!! $item->binhluan_ten !!}</td>
-                    <td>{!! $item->binhluan_email !!}</td>
-                    <td>{!! $item->binhluan_noi_dung !!}</td>
+                    <td>{!! $item->name !!}</td>
+                    <td>{!! $item->email !!}</td>
+                    <td>{!! $item->content !!}</td>
                     
                     <td>
-                    <a href="{!! URL::route('admin.binhluan.getEdit1', $item->id ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hủy chấp nhận"><i class="fa fa-times-circle"></i></a>
-                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.binhluan.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                    <a href="{!! URL::route('admin.comment.getEdit1', $item->id ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Hủy chấp nhận"><i class="fa fa-times-circle"></i></a>
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.comment.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
                     </td>
                 </tr>
             @endforeach
