@@ -44,13 +44,13 @@
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                     @foreach ($content as $item)
                       <?php 
-                          $sanpham = DB::table('sanpham')->where('id',$item->id)->first();
+                          $product = DB::table('products')->where('id',$item->id)->first();
                        ?>
                       <tr>
                         <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td>
                         <td><a class="remove" href='{!! URL::route("xoasanpham", ["id" => $item["rowid"]] ) !!}'><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="{!! url('san-pham',$sanpham->sanpham_url) !!}"><img src="{!! asset('images/sanpham/'.$sanpham->sanpham_anh) !!}"  style="width: 45px; height: 50px;"></a></td>
-                        <td><a class="aa-cart-title" href="{!! url('san-pham',$sanpham->sanpham_url) !!}">{!!  $item->name !!}</a></td>
+                        <td><a href="{!! url('san-pham',$product->slug) !!}"><img src="{!! asset('images/products/'.$product->image) !!}"  style="width: 45px; height: 50px;"></a></td>
+                        <td><a class="aa-cart-title" href="{!! url('san-pham',$product->slug) !!}">{!!  $item->name !!}</a></td>
                         <td>{!! number_format("$item->price",0,",",".") !!}vnđ</td>
                         <td><input class="qty aa-cart-quantity" type="number" value="{!!  $item->qty !!}"></td>
                         <td>{!! number_format($item->price*$item->qty,0,",",".") !!}vnđ</td>

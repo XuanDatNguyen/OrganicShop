@@ -2,20 +2,14 @@
 
 @section('content')
  <!-- catg header banner section -->
-  <section id="aa-catg-head-banner">
-   <img src="{!! url('images/slide/banner_rom.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
-   <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Đăng ký tài khoản</h2>
-        <ol class="breadcrumb">
-          <li><a href="{!! url('/') !!}">Home</a></li>         
-          <li class="active">Đăng ký tài khoản</li>
-        </ol>
+ <section id="aa-catg-head-banner">
+    <div>
+      <div class="top-bn">
+        <div class="overlay">
+          <h2 style="color: #fff; text-align: center; font-size: 4rem; line-height: 300px ">Đăng ký</h2>
+        </div>
       </div>
-     </div>
-   </div>
-  </section>
+    </div>
   </section>
   <!-- / product category -->
  <!-- Cart view section -->
@@ -107,14 +101,14 @@
                             @endif
                         </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Ảnh đại diện</label>
+                        <label class="col-md-4 control-label">Địa chỉ</label>
 
                         <div class="col-md-6">
-                            <input type="file" class="form-control" name="fImage"  ">
+                            <textarea class="form-control" rows="2" name="txtAddress" placeholder="Mô tả..."></textarea>
                         </div>
                     </div>
-
                     
                 </div>
                 </div>

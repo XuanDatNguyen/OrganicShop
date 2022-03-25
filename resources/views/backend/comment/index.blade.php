@@ -12,9 +12,9 @@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#home" data-toggle="tab"><b>Tất cả</b></a>
             </li>
-            <li><a href="#profile" data-toggle="tab"><b>Chưa xác nhận</b></a>
+            <li><a href="#profile" data-toggle="tab"><b>Chờ phê duyệt</b></a>
             </li>
-            <li><a href="#messages" data-toggle="tab"><b>Đã xác nhận</b></a>
+            <li><a href="#messages" data-toggle="tab"><b>Đã phê duyệt</b></a>
             </li>
         </ul>
     <div class="tab-content">

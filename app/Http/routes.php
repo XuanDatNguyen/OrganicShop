@@ -26,9 +26,7 @@ $this->post('password/reset', 'Auth\PasswordController@reset');
 
 
 
-// Route::get('/demo', 'HomeController@demo');
 
-Route::get('hien-san-pham/{id}','HomeController@hiensanpham');
 
 Route::get('/', 'HomeController@index');
 
@@ -38,11 +36,10 @@ Route::get('loai-san-pham/{url}', 'HomeController@cates');
 
 Route::get('bai-viet', 'HomeController@article');
 
-Route::get('tuyen-dung', 'HomeController@career');
 
 Route::get('lien-he', 'HomeController@getContact');
 
-Route::post('lien-he-test', 'HomeController@postContact');
+Route::post('lien-he', 'HomeController@postContact');
 
 Route::get('khuyen-mai', 'HomeController@promotions');
 
@@ -72,7 +69,7 @@ Route::post('ket-qua-tim-kiem',['as'=>'postTimkiem','uses'=>'HomeController@post
 // Route::post('khach-hang',['as'=>'postKhachhang','uses'=>'AuthController@postCustomer']);
 
 // Route Backend
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('tong-quan', ['as'=>'admin.index','uses'=>'AdminController@index']);
     Route::group(['prefix' => 'loaisanpham'], function() {
     	Route::get('danhsach',['as'=>'admin.category.index','uses'=>'CategoryController@getList']);

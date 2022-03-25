@@ -1,14 +1,14 @@
 @extends('backend.master')
 @section('title')
     <h3 class="page-header">
-        Đơn vị tính /
+        Đơn vị  /
         <a href="{!! URL::route('admin.unit.getAdd') !!}" class="btn btn-success" style="margin-top:-8px;"> Thêm mới</a>
     </h3>
 @stop
 @section('content')                 
 <div class="panel panel-default">
 <div class="panel-heading">
-    <b><i>Danh sách đơn vị tính</i></b>
+    <b><i>Danh sách đơn vị </i></b>
 </div>
 <!-- /.panel-heading -->
 <div class="panel-body">

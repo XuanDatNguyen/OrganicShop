@@ -28,33 +28,33 @@
                     <td>{!! $item->id !!}</td>
                     <td>
                     <?php  
-                        $kh = DB::table('khachhang')->where('id',$item->khachhang_id)->first();
-                        print_r($kh->khachhang_ten);
+                        $customer = DB::table('customers')->where('id',$item->customer_id)->first();
+                        print_r($customer->name);
                     ?> 
                     </td>
                     <td>{!! date("H:m:s d-m-Y", strtotime("$item->created_at")) !!}</td>
-                    <td>{!! number_format("$item->donhang_tong_tien",0,",",".") !!} vnđ </td>
+                    <td>{!! number_format("$item->order_total",0,",",".") !!} vnđ </td>
                     <td>
                     <?php  
-                        $tt = DB::table('tinhtranghd')->where('id',$item->tinhtranghd_id)->first();
-                        print_r($tt->tinhtranghd_ten);
+                        $order_status = DB::table('order_statuses')->where('id',$item->order_status_id)->first();
+                        print_r($order_status->name);
                     ?>  
                     </td>
                    
                     <td class="center">
-                    <a href="{!! URL::route('admin.donhang.getEdit1', $item->id ) !!}" 
+                    <a href="{!! URL::route('admin.order.getEdit1', $item->id ) !!}" 
                        type="button" class="btn btn-primary" 
                        data-toggle="tooltip" data-placement="left" 
                        title="Cập nhât Thông tin Giao hàng">
                        <i class="fa fa-truck"></i>
                     </a>
-                    <a href="{!! URL::route('admin.donhang.getEdit2', $item->id ) !!}" 
+                    <a href="{!! URL::route('admin.order.getEdit2', $item->id ) !!}" 
                        type="button" class="btn btn-success" 
                        data-toggle="tooltip" data-placement="left" 
                        title="Cập nhât Thông tin Thanh toán">
                         <i class="fa fa-credit-card"></i>
                     </a>
-                    <a href="{!! URL::route('admin.donhang.getEdit', $item->id ) !!}" 
+                    <a href="{!! URL::route('admin.order.getEdit', $item->id ) !!}" 
                        type="button" class="btn btn-warning" 
                        data-toggle="tooltip" data-placement="left" 
                        title="Cập nhât Tình trạng đơn hàng">

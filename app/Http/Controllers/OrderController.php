@@ -24,7 +24,7 @@ class OrderController extends Controller
     	$customer = DB::table('customers')->where('id',$order->customer_id)->first();
     	$order_detail = DB::table('order_details')->where('order_id',$order->id)->get();
 
-    	return view('backend.order.add',compact('order','order_statuses','customer','order_detail'));
+    	return view('backend.order.sua',compact('order','order_statuses','customer','order_detail'));
     }
 
     public function postEdit(Request $request,$id)
@@ -109,7 +109,7 @@ class OrderController extends Controller
     	$order = DB::table('orders')->where('id',$id)->first();
     	$customer = DB::table('customers')->where('id',$order->customer_id)->first();
     	$order_detail = DB::table('order_details')->where('order_id',$order->id)->get();
-    	return view('backend.order.addgiaohang',compact('order','order_statuses','customer','detail'));
+    	return view('backend.order.suagiaohang',compact('order','order_statuses','customer','order_detail'));
     }
 
     public function postEdit1(OrderRequest $request,$id)
@@ -136,7 +136,7 @@ class OrderController extends Controller
     	$customer = DB::table('customers')->where('id',$order->customer_id)->first();
     	$order_detail = DB::table('order_details')->where('order_id',$order->id)->get();
 
-    	return view('backend.order.addthanhtoan',compact('order','order_statuses','customer','order_detail'));
+    	return view('backend.order.suathanhtoan',compact('order','order_statuses','customer','order_detail'));
     }
 
     public function postEdit2(Request $request,$id)

@@ -37,35 +37,35 @@
                       </div>
                       <input type="hidden" name="" value="{!! Auth::user()->id !!}" />
                       <?php 
-                        $khachhang = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
-                        // print_r($khachhang);
+                        $customer = DB::table('customers')->where('user_id',Auth::user()->id)->first();
+                        // print_r($customer);
                       ?>
-                      <input type="hidden" name="txtKHID" value="{!! $khachhang->id !!}" />
+                      <input type="hidden" name="txtKHID" value="{!! $customer->id !!}" />
                       <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" name="txtKHName" value="{{ $khachhang->khachhang_ten }}" placeholder="Họ và tên*" />
+                                <input type="text" name="txtKHName" value="{{ $customer->name }}" placeholder="Họ và tên*" />
                               </div>                             
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="email" name="txtKHEmail" value="{{ $khachhang->khachhang_email }}"  placeholder="Mail*">
+                                <input type="email" name="txtKHEmail" value="{{ $customer->email }}"  placeholder="Mail*">
                               </div>                             
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="tel" name="txtKHPhone" value="{{ $khachhang->khachhang_sdt }}"  placeholder="Số điện thoại*">
+                                <input type="tel" name="txtKHPhone" value="{{ $customer->phone }}"  placeholder="Số điện thoại*">
                               </div>
                             </div>
                           </div> 
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <textarea cols="8" rows="3" name="txtKHAddr"  placeholder="Địa chỉ*"> {{ $khachhang->khachhang_dia_chi }}</textarea>
+                                <textarea cols="8" rows="3" name="txtKHAddr"  placeholder="Địa chỉ*"> {{ $customer->address }}</textarea>
                               </div>                             
                             </div>                            
                           </div>                                      

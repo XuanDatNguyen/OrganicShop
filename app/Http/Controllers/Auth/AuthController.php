@@ -89,6 +89,7 @@ class AuthController extends Controller
             'name' => $data['txtname'],
             'email' => $data['email'],
             'phone' => $data['txtphone'],
+            'address' => $data['txtAddress'],
             'user_id' => $user->id,
         ]);
         return $user;

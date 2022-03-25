@@ -11,6 +11,9 @@ use App\Comment;
 use Illuminate\Support\Str;
 use App\Http\Requests\ThanhtoanRequest;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PayRequest;
+use App\Order;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -136,15 +139,15 @@ class HomeController extends Controller
     public function buyding(Request $request,$id)
     {
         // print_r($id);
-        $product = DB::select('select * from sanpham where id = ?',[$id]);
+        $product = DB::select('select * from products where id = ?',[$id]);
         // print_r($product);
         if ($product[0]->is_promotion == 1) {
-            $muasanpham = DB::select('select sp.id,sp.name,lh.lohang_ky_hieu, lh.sale_price, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.product_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.product_id = sp.id and sp.id = ?', [$id]);
-            $giakm = $muasanpham[0]->sale_price - $muasanpham[0]->sale_price*$muasanpham[0]->khuyenmai_phan_tram*0.01;
+            $muasanpham = DB::select('select sp.id,sp.name, lh.sale_price, sp.id, km.percent from products as sp, consignments as lh, vendors as ncc, promotional_products as spkm, promotions as km  where km.status = 1 and sp.id = spkm.product_id and spkm.promotion_id = km.id and ncc.id = lh.vendor_id and lh.product_id = sp.id and sp.id = ?', [$id]);
+            $giakm = $muasanpham[0]->sale_price - $muasanpham[0]->sale_price*$muasanpham[0]->percent*0.01;
             print_r($giakm);
             Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->name, 'qty' => 1, 'price' => $giakm));
         } else {
-            $muasanpham = DB::select('select sp.id,sp.name,lh.lohang_ky_hieu, lh.sale_price from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.product_id = sp.id and sp.id = ?',[$id]);
+            $muasanpham = DB::select('select sp.id,sp.name, lh.sale_price from products as sp, consignments as lh, vendors as ncc  where ncc.id = lh.vendor_id and lh.product_id = sp.id and sp.id = ?',[$id]);
             $gia = $muasanpham[0]->sale_price;
             Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->name, 'qty' => 1, 'price' => $gia));
         }
@@ -187,28 +190,28 @@ class HomeController extends Controller
         return view('frontend.pages.checkin',compact('content','total'));
     }
 
-    public function postCheckin(ThanhtoanRequest $request)
+    public function postCheckin(PayRequest $request)
     {
         $content = Cart::content();
         $total = Cart::total();
 
-        $donhang = new Donhang;
-        $donhang->donhang_nguoi_nhan = $request->txtNNName;
-        $donhang->donhang_nguoi_nhan_email = $request->txtNNEmail;
-        $donhang->donhang_nguoi_nhan_sdt = $request->txtNNPhone;
-        $donhang->donhang_nguoi_nhan_dia_chi = $request->txtNNAddr;
-        $donhang->donhang_ghi_chu = $request->txtNNNote;
-        $donhang->donhang_tong_tien = $total;
-        $donhang->khachhang_id = $request->txtKHID;
-        $donhang->tinhtranghd_id = 1;
-        $donhang->save();
+        $order = new Order();
+        $order->recipient = $request->txtNNName;
+        $order->recipient_email = $request->txtNNEmail;
+        $order->recipient_phone = $request->txtNNPhone;
+        $order->recipient_address = $request->txtNNAddr;
+        $order->order_note = $request->txtNNNote;
+        $order->order_total = $total;
+        $order->customer_id = $request->txtKHID;
+        $order->order_status_id = 1;
+        $order->save();
 
         foreach ($content as $item) {
-            $detail = new Chitietdonhang;
+            $detail = new OrderDetail();
             $detail->product_id = $item->id;
-            $detail->donhang_id = $donhang->id;
-            $detail->chitietdonhang_so_luong = $item->qty;
-            $detail->chitietdonhang_thanh_tien = $item->price*$item->qty;
+            $detail->order_id = $order->id;
+            $detail->qty = $item->qty;
+            $detail->total_amount = $item->price*$item->qty;
             $detail->save();
         }
        

@@ -12,7 +12,7 @@
               </h3>
             <div class="navbar-right" style="margin-right:10px;margin-top:-50px;">
                 <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="{!! URL::route('admin.donhang.list') !!}" ><i class="btn btn-default" >Hủy</i></a>
+                <a href="{!! URL::route('admin.order.index') !!}" ><i class="btn btn-default" >Hủy</i></a>
             </div>
             </div>
             <div class="panel-body">
@@ -29,19 +29,19 @@
                   <tbody>
                       <tr>
                           <td><b>Tên khách hàng</b></td>
-                          <td>{!! $khachhang->khachhang_ten !!}</td>
+                          <td>{!! $customer->name !!}</td>
                       </tr>
                       <tr>
                           <td><b>Số điện thoại</b></td>
-                          <td>{!! $khachhang->khachhang_sdt !!}</td>
+                          <td>{!! $customer->phone !!}</td>
                       </tr>
                       <tr>
                           <td><b>Email</b></td>
-                          <td>{!! $khachhang->khachhang_email !!}</td>
+                          <td>{!! $customer->email !!}</td>
                       </tr>
                       <tr>
                           <td><b>Địa chỉ</b></td>
-                          <td>{!! $khachhang->khachhang_dia_chi !!}</td>
+                          <td>{!! $customer->address !!}</td>
                       </tr>
                   </tbody>
               </table>
@@ -54,7 +54,7 @@
                 <div>
                     <select id="input" name="selStatus"  class="form-control">
                             <option >--Chọn tình trạng đơn hàng--</option>
-                            <?php Select_Function($tinhtrang,$donhang->tinhtranghd_id); ?>
+                            <?php Select_Function($order_statuses,$order->order_status_id); ?>
                     </select>
                 </div>
             </div>
@@ -72,25 +72,25 @@
                   <tbody>
                       <tr>
                           <td><b>Người nhận hàng</b></td>
-                          <td>{!! $donhang->donhang_nguoi_nhan !!}</td>
+                          <td>{!! $order->recipient !!}</td>
                       </tr>
                       <tr>
                           <td><b>Số điện thoại</b></td>
-                          <td>{!! $donhang->donhang_nguoi_nhan_sdt !!}</td>
+                          <td>{!! $order->recipient_phone !!}</td>
                       </tr>
                       <tr>
                           <td><b>Email</b></td>
-                          <td>{!! $donhang->donhang_nguoi_nhan_email !!}</td>
+                          <td>{!! $order->recipient_email !!}</td>
                       </tr>
                       <tr>
                           <td><b>Địa chỉ</b></td>
-                          <td>{!! $donhang->donhang_nguoi_nhan_dia_chi !!}</td>
+                          <td>{!! $order->recipient_address !!}</td>
                       </tr>
                       <tr>
                           <td><b>Ghi chú</b></td>
                           <td>
-                          @if (!asset($donhang->donhang_ghi_chu))
-                            {{ $donhang->donhang_ghi_chu }}
+                          @if (!asset($order->order_note))
+                            {{ $order->order_note }}
                           @else
                             Không có ghi chú
                           @endif
@@ -124,25 +124,25 @@
                         </thead>
                         <tbody>
                         <?php $count = 0; ?>
-                            @foreach ($chitiet as $val)
+                            @foreach ($order_detail as $val)
                                 <tr>
                                     <td>{!! $count = $count + 1 !!}</td>
                                     <td>
                                         <?php  
-                                            $sp = DB::table('sanpham')->where('id',$val->sanpham_id)->first();
-                                            print_r($sp->sanpham_ten);
+                                            $products = DB::table('products')->where('id',$val->product_id)->first();
+                                            print_r($products->name);
                                         ?>
                                     </td>
                                     <td>
-                                    {!! number_format($val->chitietdonhang_thanh_tien/$val->chitietdonhang_so_luong,0,",",".") !!} vnđ 
+                                    {!! number_format($val->total_amount/$val->qty,0,",",".") !!} vnđ 
                                     </td>
-                                    <td>{!! $val->chitietdonhang_so_luong !!}</td>
-                                    <td>{!! number_format("$val->chitietdonhang_thanh_tien",0,",",".") !!} vnđ </td>
+                                    <td>{!! $val->qty !!}</td>
+                                    <td>{!! number_format("$val->total_amount",0,",",".") !!} vnđ </td>
                                 </tr>
                             @endforeach
                             <tr>
                             <td colspan="5">
-                            <b>Tổng tiền : {!! number_format("$donhang->donhang_tong_tien",0,",",".") !!} vnđ </b>
+                            <b>Tổng tiền : {!! number_format("$order->order_total",0,",",".") !!} vnđ </b>
                                 
                             </td>
                                 
