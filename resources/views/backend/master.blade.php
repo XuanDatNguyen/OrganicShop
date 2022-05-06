@@ -78,7 +78,7 @@
                                     <a href="{!! URL::route('admin.nhom.list') !!}"> Nhóm thực phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị tính</a>
+                                    <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị</a>
                                 </li>
                                 
                                 <li>
@@ -106,7 +106,7 @@
                             <a href="{!! URL::route('admin.baiviet.list') !!}"><i class="fa fa-list"></i> Bài viết</a>
                         </li>
                         <li>
-                            <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i> Quảng cáo</a>
+                            <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i> Banner</a>
                         </li>
                         <li>
                         </li>

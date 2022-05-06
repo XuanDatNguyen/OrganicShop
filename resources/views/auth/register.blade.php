@@ -7,7 +7,6 @@
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
-        <h2>Đăng ký tài khoản</h2>
         <ol class="breadcrumb">
           <li><a href="{!! url('/') !!}">Home</a></li>         
           <li class="active">Đăng ký tài khoản</li>
@@ -21,111 +20,92 @@
  <!-- Cart view section -->
  <section id="aa-myaccount">
    <div class="container">
-     <div class="row">
-       <div class="col-md-12">
-        <div class="aa-myaccount-area">         
-            <div class="row">
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+   <div class="row" >
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="text-center">Đăng ký</h2>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
-                <div class="col-md-6">
-                <div class="aa-myaccount-login">
-                    <h4>Thông tin tài khoản</h4>
-                    <div class="form-group">
-                                
-                            </div>
+                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">E-Mail</label>
+                        <div class="form-group{{ $errors->has('txtname') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Tên khách hàng<span>*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="txtname" value="{{ old('txtname') }}">
 
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Mật khẩu</label>
-
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password">
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Xác nhận mật khẩu</label>
-
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password_confirmation">
-
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+                                @if ($errors->has('txtname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('txtname') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                </div>
-                <div class="col-md-6">
-                <div class="aa-myaccount-register">                 
-                 <h4>Thông tin khách hàng</h4>
-                    <div class="form-group{{ $errors->has('txtname') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">Tên khách hàng</label>
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="txtname" value="{{ old('txtname') }}">
-
-                            @if ($errors->has('txtname'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('txtname') }}</strong>
-                                </span>
-                            @endif
+                        <div class="form-group{{ $errors->has('txtphone') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Số điện thoại<span>*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="txtphone" value="{{ old('txtphone') }}">
+                                @if ($errors->has('txtphone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('txtphone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group{{ $errors->has('txtphone') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">Số điện thoại</label>
+                        <div class="form-group{{ $errors->has('txtaddress') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Địa chỉ<span>*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="txtaddress" value="{{ old('address') }}">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="txtphone" value="{{ old('txtphone') }}">
-
-                            @if ($errors->has('txtphone'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('txtphone') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('txtaddress'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('txtaddress') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Ảnh đại diện</label>
 
-                        <div class="col-md-6">
-                            <input type="file" class="form-control" name="fImage"  ">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label"><span>Email*</span></label>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Password<span>*</span></label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password">
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-success">
+                                    Đăng ký
+                                </button>
+                                <a class="btn btn-success" href="{{ url('/login') }}" type="button">Đăng nhập</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="aa-browse-btn">
-                            </i>Đăng ký
-                        </button>
-                    </div>
-                </div>
-            </form>
             </div>
         </div>
     </div>

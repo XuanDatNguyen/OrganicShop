@@ -51,7 +51,6 @@
                                       ?> 
                                     <span class="aa-badge aa-sold-out" >Giảm {!! $x  !!}%!</span>
                                     <span class="aa-product-price">
-                                    
                                       {!! number_format($gia_km,0,",",".") !!} vnđ
                                   </span>
                                   <span class="aa-product-price">

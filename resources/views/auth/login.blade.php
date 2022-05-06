@@ -1,12 +1,26 @@
 @extends('frontend.master')
 
 @section('content')
-
+<section id="aa-catg-head-banner">
+   <img src="{!! url('images/slide/banner_rom.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
+   <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <ol class="breadcrumb">
+          <li><a href="{!! url('/') !!}">Home</a></li>         
+          <li class="active">Đăng nhập</li>
+        </ol>
+      </div>
+     </div>
+   </div>
+  </section>
 <div class="container" style="padding-top:200px">
     <div class="row" >
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Đăng nhập</div>
+                <div class="panel-heading">
+                    <h2 class="text-center">Đăng nhập</h2>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
@@ -41,11 +55,11 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="aa-browse-btn">
+                                <button type="submit" class="btn btn-success">
                                     Đăng nhập
                                 </button>
 
-                                <a class="aa-browse-btn" href="{{ url('/register') }}" type="button">Đăng ký</a>
+                                <a class="btn btn-success" href="{{ url('/register') }}" type="button">Đăng ký</a>
                             </div>
                         </div>
                     </form>
