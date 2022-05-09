@@ -47,7 +47,7 @@
                           $sanpham = DB::table('sanpham')->where('id',$item->id)->first();
                        ?>
                       <tr>
-                        <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td>
+                        <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='{!! URL::route("capnhat", ["id" => $item["rowid"]] ) !!}><fa class=" fa fa-edit"></fa></a></td>
                         <td><a class="remove" href='{!! URL::route("xoasanpham", ["id" => $item["rowid"]] ) !!}'><fa class="fa fa-close"></fa></a></td>
                         <td><a href="{!! url('san-pham',$sanpham->sanpham_url) !!}"><img src="{!! asset('images/sanpham/'.$sanpham->sanpham_anh) !!}"  style="width: 45px; height: 50px;"></a></td>
                         <td><a class="aa-cart-title" href="{!! url('san-pham',$sanpham->sanpham_url) !!}">{!!  $item->name !!}</a></td>

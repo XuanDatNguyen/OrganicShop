@@ -229,6 +229,7 @@ class HomeController extends Controller
     public function updateProduct()
     {
         if(Request::ajax()) {
+            die($qty);
             $id = Request::get('id');
             $qty = Request::get('qty');
             Cart::update($id,$qty);
