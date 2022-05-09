@@ -159,7 +159,7 @@ class HomeController extends Controller
     public function cart()
     {
         $content = Cart::content();
-        //print_r($content);
+        // die($content);
         $total = Cart::total();
         return view('frontend.pages.cart',compact('content','total'));
     }
@@ -170,14 +170,16 @@ class HomeController extends Controller
         return redirect()->route('giohang');
     }
 
-    public function updateProduct()
+    public function updateProduct(Request $request)
     {
-        if(Request::ajax()) {
-            $id = Request::get('id');
-            $qty = Request::get('qty');
-            Cart::update($id,$qty);
-            echo "oke";
-        }
+        $rowId = $request->rowid;
+        $qty = $request->qty;
+       
+        Cart::update($rowId, ['qty' => $qty]);
+        $content = Cart::content(); 
+        $total = Cart::total(0,",","."); 
+           
+        return view('frontend.pages.cart-table', compact('content','total'));
     }
 
     public function getCheckin()

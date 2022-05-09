@@ -55,7 +55,8 @@ Route::get('gio-hang',['as'=>'giohang','uses'=>'HomeController@cart']);
 
 Route::get('xoa-san-pham/{id}',['as'=>'xoasanpham','uses'=>'HomeController@deleteProduct']);
 
-Route::get('cap-nhat-san-pham/{id}/{qty}',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
+// Route::get('cap-nhat-san-pham/{id}/{qty}',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
+Route::get('cap-nhat-so-luong-san-pham',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
 
 Route::get('thanh-toan',['as'=>'getThanhtoan','uses'=>'HomeController@getCheckin']);
 

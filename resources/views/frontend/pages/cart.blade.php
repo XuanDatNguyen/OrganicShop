@@ -1,96 +1,66 @@
 @extends('frontend.master')
 @section('content')
-  <!-- catg header banner section -->
-  <section id="aa-catg-head-banner">
-   <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Giỏ hàng</h2>
-      </div>
-     </div>
-   </div>
-  </section>
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>Giỏ hàng</h2>
+            </div>
+        </div>
+    </div>
+</section>
 
-  @include('frontend.blocks.trans')
+@include('frontend.blocks.trans')
 
-  <!-- / product category -->
+<!-- / product category -->
 
-  <!-- Support section -->
-  <!-- / Support section -->
+<!-- Support section -->
+<!-- / Support section -->
 
- <!-- Cart view section -->
- <section id="cart-view">
-   <div class="container">
-       <div class="col-md-12">
-         <div class="cart-view-area">
-           <div class="cart-view-table">
-             <form action="">
-               <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th></th>
-                        <th>Ảnh</th>
-                        <th>Sản phẩm</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Thành tiền</th>
-                      </tr>
-                    </thead>
-                    
-                    <tbody>
-                    <form action="" method="POST" accept-charset="utf-8">
-                    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                    @foreach ($content as $item)
-                      <?php 
-                          $product = DB::table('products')->where('id',$item->id)->first();
-                       ?>
-                      <tr>
-                        <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td>
-                        <td><a class="remove" href='{!! URL::route("xoasanpham", ["id" => $item["rowid"]] ) !!}'><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="{!! url('san-pham',$product->slug) !!}"><img src="{!! asset('images/products/'.$product->image) !!}"  style="width: 45px; height: 50px;"></a></td>
-                        <td><a class="aa-cart-title" href="{!! url('san-pham',$product->slug) !!}">{!!  $item->name !!}</a></td>
-                        <td>{!! number_format("$item->price",0,",",".") !!}vnđ</td>
-                        <td><input class="qty aa-cart-quantity" type="number" value="{!!  $item->qty !!}"></td>
-                        <td>{!! number_format($item->price*$item->qty,0,",",".") !!}vnđ</td>
-                      </tr>
-                    @endforeach
+<!-- Cart view section -->
+<section id="cart-view">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="cart-view-area">
+                <div class="cart-view-table">
+                    <form action="">
+                        <div class="table-responsive" id="my-cart">
+
+                           @include('frontend.pages.cart-table')
+                        </div>
                     </form>
-                      </tbody>
-                      
-                  </table>
+                    <!-- Cart Total view -->
+                    <div class="cart-view-total">
+                        <!-- <h4>Tổng tiền</h4> -->
+                        <table class="aa-totals-table">
+                            <tbody>
+                                <tr>
+                                    <th>Tổng tiền</th>
+                                    <td> {!! number_format("$total",0,",",".") !!}vnđ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @if (Auth::check())
+                        <a href="{!! url('/') !!}" class="aa-cart-view-btn"> Mua tiếp</a>
+                        <a href="{!! URL::route('getThanhtoan') !!}" class="aa-cart-view-btn">Thanh Toán</a>
+
+                        @else
+                        <a href="{!! url('/') !!}" class="aa-cart-view-btn">Mua tiếp</a>
+                        <a href="{!! url('login') !!}" class="aa-cart-view-btn">Thanh Toán</a>
+                        @endif
+
+                    </div>
                 </div>
-             </form>
-             <!-- Cart Total view -->
-             <div class="cart-view-total">
-               <!-- <h4>Tổng tiền</h4> -->
-               <table class="aa-totals-table">
-                 <tbody>
-                   <tr>
-                     <th>Tổng tiền</th>
-                     <td> {!! number_format("$total",0,",",".") !!}vnđ</td>
-                   </tr>
-                 </tbody>
-               </table>
-               @if (Auth::check())
-                  <a href="{!! url('/') !!}" class="aa-cart-view-btn"> Mua tiếp</a>
-                  <a href="{!! URL::route('getThanhtoan') !!}" class="aa-cart-view-btn">Thanh Toán</a>
-                  
-               @else
-                  <a href="{!! url('/') !!}" class="aa-cart-view-btn">Mua tiếp</a>
-                  <a href="{!! url('login') !!}" class="aa-cart-view-btn">Thanh Toán</a>
-               @endif
-               
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </section>
- <!-- / Cart view section -->
- <!-- Footer -->
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- / Cart view section -->
+
+
+<!-- Footer -->
 @include('frontend.blocks.footer')
 <!-- / Footer -->
-@stop
+@endsection
