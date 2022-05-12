@@ -110,16 +110,16 @@
                         </li>
 
                         <li>
-                            <a href="{!! URL::route('admin.banner.index') !!}"><i class="fa-share-alt-square"></i> Quảng cáo</a>
+                            <a href="{!! URL::route('admin.banner.index') !!}"><i class="fa fa-file-text"></i> Quảng cáo</a>
                         </li>
                        
                         <li>
                             <a href="{!! URL::route('admin.promotion.index') !!}"><i class="fa fa-bars"></i> Khuyến mãi</a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="{!! URL::route('admin.statistic.index') !!}"><i class="fa fa-cubes"></i> Kho hàng</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 

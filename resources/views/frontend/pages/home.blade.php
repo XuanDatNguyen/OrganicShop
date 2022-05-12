@@ -43,11 +43,11 @@
                                         foreach($ty_le_gia as $phan_tram) {
                                           if($item->id == $phan_tram->id) {
                                             $gia_km = ($item->sale_price - ($item->sale_price*$phan_tram->percent*0.01));
-                                            $x = $phan_tram->percent;
+                                            $giam = $phan_tram->percent;
                                           }
                                         } 
                                       ?> 
-                                    <span class="aa-badge aa-sold-out" >Giảm {!! $x  !!}%!</span>
+                                    <span class="aa-badge aa-sold-out" >Giảm {!! $giam  !!}%!</span>
                                     <span class="aa-product-price">
                                     
                                       {!! number_format($gia_km,0,",",".") !!} vnđ
@@ -80,6 +80,12 @@
       </section>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+    <span>{!! $product->links() !!}</span>
+    </div>
+  </div>
+
 
   <!-- / Products section -->
 <!-- Support section -->

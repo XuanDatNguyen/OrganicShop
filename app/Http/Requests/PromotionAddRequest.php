@@ -26,6 +26,7 @@ class PromotionAddRequest extends Request
         return [
             'txtKMTittle'  => 'required|unique:promotions,title',
             'txtKMContent'  => 'required',
+            'txtKMTime' => 'required|numeric|min:0',
         ];
     }
 
@@ -33,6 +34,7 @@ class PromotionAddRequest extends Request
         return [
             'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
             'txtKMTittle.unique' => '<div><strong  style="color: red;">Dữ liệu này đã tồn tại!</strong></div>',
+            'txtKMTime.min' => '<div><strong  style="color: red;">Vui lòng nhập số ngày lớn hơn 0!</strong></div>',
         ];
     }
 }

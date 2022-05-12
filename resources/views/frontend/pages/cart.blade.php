@@ -22,36 +22,8 @@
 <section id="cart-view">
     <div class="container">
         <div class="col-md-12">
-            <div class="cart-view-area">
-                <div class="cart-view-table">
-                    <form action="">
-                        <div class="table-responsive" id="my-cart">
-
-                           @include('frontend.pages.cart-table')
-                        </div>
-                    </form>
-                    <!-- Cart Total view -->
-                    <div class="cart-view-total">
-                        <!-- <h4>Tổng tiền</h4> -->
-                        <table class="aa-totals-table">
-                            <tbody>
-                                <tr>
-                                    <th>Tổng tiền</th>
-                                    <td> {!! number_format("$total",0,",",".") !!}vnđ</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @if (Auth::check())
-                        <a href="{!! url('/') !!}" class="aa-cart-view-btn"> Mua tiếp</a>
-                        <a href="{!! URL::route('getThanhtoan') !!}" class="aa-cart-view-btn">Thanh Toán</a>
-
-                        @else
-                        <a href="{!! url('/') !!}" class="aa-cart-view-btn">Mua tiếp</a>
-                        <a href="{!! url('login') !!}" class="aa-cart-view-btn">Thanh Toán</a>
-                        @endif
-
-                    </div>
-                </div>
+            <div class="cart-view-area" id="cart-view-render">
+                @include('frontend.pages.cart-table')
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@
                 <td align="center">
                     
                     @if ($item->status == 1)
-                    <a href="{!! URL::route('admin.banner.getChange', [$item->id,0] ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Hiện</a>
+                    <a href="{!! URL::route('admin.banner.getChange', [$item->id,0] ) !!}" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Hiển thị</a>
                     <input type="hidden" name="txtChance" value="0" />
                     @else
                     <a href="{!! URL::route('admin.banner.getChange', [$item->id,1] ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Cập nhật trạng thái">Ẩn</a>

@@ -46,7 +46,7 @@ class HomeController extends Controller
                                                      'consignments.sale_price')
                                          ->groupBy('products.id')
                                          ->orderBy('id','DESC')
-                                         ->paginate(16);
+                                         ->paginate(8);
 
         return view ('frontend.pages.home',compact('category','product'));
     }
@@ -138,11 +138,13 @@ class HomeController extends Controller
 
     public function buyding(Request $request,$id)
     {
-        // print_r($id);
         $product = DB::select('select * from products where id = ?',[$id]);
-        // print_r($product);
+        
+        // die(print_r($product[0]->name));
         if ($product[0]->is_promotion == 1) {
-            $muasanpham = DB::select('select sp.id,sp.name, lh.sale_price, sp.id, km.percent from products as sp, consignments as lh, vendors as ncc, promotional_products as spkm, promotions as km  where km.status = 1 and sp.id = spkm.product_id and spkm.promotion_id = km.id and ncc.id = lh.vendor_id and lh.product_id = sp.id and sp.id = ?', [$id]);
+            $muasanpham = DB::select('select sp.id,sp.name, lh.sale_price, sp.id, km.percent 
+            from products as sp, consignments as lh, vendors as ncc, promotional_products as spkm, promotions as km  
+            where km.status = 1 and sp.id = spkm.product_id and spkm.promotion_id = km.id and ncc.id = lh.vendor_id and lh.product_id = sp.id and sp.id = ?', [$id]);
             $giakm = $muasanpham[0]->sale_price - $muasanpham[0]->sale_price*$muasanpham[0]->percent*0.01;
             print_r($giakm);
             Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->name, 'qty' => 1, 'price' => $giakm));
@@ -170,16 +172,23 @@ class HomeController extends Controller
         return redirect()->route('giohang');
     }
 
-    public function updateProduct(Request $request)
+    public function updateProduct(Request $request, $id)
     {
+        $currentQty = DB::select('select sum(current_qty) as total_qty from consignments where product_id = ?',[$id]);
+        $total_qty = $currentQty[0]->total_qty;
         $rowId = $request->rowid;
         $qty = $request->qty;
-       
-        Cart::update($rowId, ['qty' => $qty]);
-        $content = Cart::content(); 
-        $total = Cart::total(0,",","."); 
-           
-        return view('frontend.pages.cart-table', compact('content','total'));
+        if($qty <= $total_qty) {
+            Cart::update($rowId, ['qty' => $qty]);
+            $content = Cart::content(); 
+            $total = Cart::total(0,",","."); 
+            return view('frontend.pages.cart-table', compact('content','total', 'total_qty'));
+        }else{
+            echo "<script>
+          alert('Số lượng mặt hàng trong kho không đủ!');
+          window.location = '".url('/gio-hang')."';</script>";
+        }
+        
     }
 
     public function getCheckin()

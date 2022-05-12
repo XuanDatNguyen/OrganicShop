@@ -32,6 +32,7 @@ class OrderController extends Controller
     	$order = DB::table('orders')->where('id',$id)->first();
     	$status1 = $order->order_status_id;
     	$status2 = $request->selStatus;
+		// die($request);
     	// $idSP = DB::table('order_details')->select('product_id','qty')->where('order_id',$id)->get();
     	// // print_r($idSP);
     	// foreach ($idSP as $key => $val) {
@@ -70,8 +71,7 @@ class OrderController extends Controller
 	    		DB::table('consignments')->where('id',$new_consignment_id)
 										 ->update([
 										 	 'change_qty' => $consignment->change_qty + $val->qty,
-										 	 'current_qty' => $consignment->current_qty + $val->qty,
-										 	 'sold_qty' => $consignment->sold_qty - $val->qty,
+										 	 'current_qty' => $consignment->current_qty - $val->qty,
 										 ]);
 	    	}
     	}elseif ($status1 != $status2 && $status2 == 4) {

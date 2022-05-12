@@ -26,12 +26,14 @@ class PromotionEditRequest extends Request
         return [
             'txtKMTittle'  => 'required',
             'txtKMContent'  => 'required',
+            'txtKMTime' => 'required|numeric|min:0',
         ];
     }
 
     public function messages() {
         return [
             'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            'txtKMTime.min' => '<div><strong  style="color: red;">Vui lòng nhập số ngày lớn hơn 0!</strong></div>',
         ];
     }
 }

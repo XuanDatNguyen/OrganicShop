@@ -109,17 +109,22 @@ class ProductController extends Controller
 
     public function getDelete($id)
     {   
-        $binhluan = DB::table('comments')->where('product_id',$id)->get();
-        foreach ($binhluan as $val) {
-            
-            DB::table('comments')->where('product_id',$id)->delete();
-        }
-        DB::table('consignments')->where('product_id',$id)->delete();
         
+        $lohang = DB::table('consignments')->where('product_id',$id)->get();
+        $khuyenmai = DB::table('promotional_products')->where('product_id',$id)->get();
+        $nguyenlieu = DB::table('resources')->where('product_id',$id)->get();
+        
+        if($nguyenlieu || $khuyenmai || $lohang) {
+            // die("pass");
+            return redirect()->route('admin.product.index')->with(['flash_level'=>'danger','flash_message'=>'Sản phẩm đang được sử dụng!!!']);
+        }
+
     	$product = DB::table('products')->where('id',$id)->first();
         $img = 'images/products/'.$product->image;
         File::delete($img);
         DB::table('products')->where('id',$id)->delete();
+        DB::table('comments')->where('product_id',$id)->delete();
+
 
         return redirect()->route('admin.product.index')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
     }
@@ -157,17 +162,7 @@ class ProductController extends Controller
             echo "File empty";
         }
 
-        // if(!empty($request->fEditImage)) {
-        //     foreach ($request->fEditImage as $file) {
-        //         $detail_img = new Hinhsanpham();
-        //         if (isset($file)) {
-        //             $detail_img->hinhsanpham_ten = $file->getClientOriginalName();
-        //             $detail_img->sanpham_id = $id;
-        //             $file->move('images/chitietsanpham/', $file->getClientOriginalName());
-        //             $detail_img->save();
-        //         } 
-        //   }
-        // }
+        
 
         $product->save();
 

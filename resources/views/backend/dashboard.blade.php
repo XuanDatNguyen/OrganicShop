@@ -96,37 +96,7 @@
 <!-- /.row -->
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Sơ đồ thống kê sản phẩm hàng tháng
-            </div>
-            <!-- /.panel-heading -->
-            <div class="container-fluid">
-                <canvas id="RadarChart" style="width:50%;"></canvas>
-            </div>
-            <!-- So do so luong san pham hang thang -->
-            <?php
-                //tổng sl theo từng tháng
-                $sp = DB::select('select sum(qty) as nhap,sum(sold_qty) as ban,sum(change_qty) as tra,MONTH(created_at) as thang from consignments group By MONTH(created_at)');
-                for ($i= 0; $i < count($sp) ; $i++) {
-                    $keys[] = 'Tháng '. $sp[$i]->thang;
-                    $val[] = array($sp[$i]->nhap,$sp[$i]->ban,$sp[$i]->tra);
-                }
-                $data = array_combine($keys, $val);
-                $options['legends'] = ['Nhập vào', 'Bán ra', 'Đổi trả'];
-            ?>
-            <!-- /So do so luong san pham hang thang -->
-            {!! app()->chartbar->render("RadarChart", $data, $options) !!}
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-        <!-- /.panel -->
-    </div>
 
-    
-</div>
-<!-- /.row -->
+<!-- /.row
 
 @stop

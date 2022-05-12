@@ -23,6 +23,7 @@ class PromotionController extends Controller
             $today = date("Y-m-d"); // Năm/Tháng/Ngày
             $begin =  date("Y-m-d", strtotime("$item->created_at")); // Năm/Tháng/Ngày
             $end   = date("Y-m-d",strtotime($begin . "+ $item->estimate  day"));
+            // die($end);
           
             if ((strtotime($today) >= strtotime($begin)) && (strtotime($today) <= strtotime($end)))
             {      

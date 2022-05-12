@@ -17,7 +17,7 @@
         @foreach ($order as $item)
         <?php 
              
-            switch ($item->tinhtranghd_id) {
+            switch ($item->order_status_id) {
                 case '1':
                     $color = "red";
                     break;
@@ -41,7 +41,7 @@
                     <?php
                     $tt = DB::table('order_statuses')->where('id', $item->order_status_id)->first();  
                     ?>
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$item->id}}" ><p style="color:white;"><b>Đơn hàng số {{ $item->id }} | <i>Tình trạng:</i> {{$tt->tinhtranghd_ten}}</b></p></a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$item->id}}" ><p style="color:white;"><b>Đơn hàng số {{ $item->id }} | <i>Tình trạng:</i> {{$tt->name}}</b></p></a>
 
                 </h4>
             </div>
@@ -95,7 +95,7 @@
                                   </tr>
                                   <tr>
                                       <td><b>Số điện thoại</b></td>
-                                      <td>{!! $item->phone !!}</td>
+                                      <td>{!! $item->recipient_phone !!}</td>
                                   </tr>
                                   <tr>
                                       <td><b>Email</b></td>
@@ -108,8 +108,8 @@
                                   <tr>
                                       <td><b>Ghi chú</b></td>
                                       <td>
-                                      @if (!asset($item->oder_note))
-                                        {{ $item->oder_note }}
+                                      @if (!asset($item->order_note))
+                                        {{ $item->order_note }}
                                       @else
                                         Không có ghi chú
                                       @endif
@@ -124,7 +124,7 @@
                     </div>
                     </div>
                     <?php 
-                        $order_detail = DB::table('order_details')->where('oder_id',$item->id)->get();
+                        $order_detail = DB::table('order_details')->where('order_id',$item->id)->get();
                     ?>
                     <hr>
                     <div class="row">
@@ -166,7 +166,7 @@
                                             @endforeach
                                             <tr>
                                             <td colspan="5">
-                                            <b>Tổng tiền : {!! number_format("$item->oder_total",0,",",".") !!} vnđ </b>
+                                            <b>Tổng tiền : {!! number_format("$item->order_total",0,",",".") !!} vnđ </b>
                                             </td>
                                             </tr>
                                         </tbody>
